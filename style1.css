@@ -1,0 +1,1500 @@
+/* ==========================================================================
+   1. 基本設定 (フォント, 変数, リセット)
+   ========================================================================== */
+
+/* フォント読み込み */
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Zen+Maru+Gothic&display=swap');
+
+/* CSS変数定義 */
+:root {
+    /* --- 基本テーマ --- */
+    --c-bg: #c41e3a;
+    --c-main-bg: #d1e9dd;
+    --c-text: #222;
+    --c-border: #333;
+    --c-accent: #f7d864;
+    --c-header-bg: rgba(0,0,0,0.4);
+    --c-white: #fff;
+    --c-white-op90: rgba(255,255,255,0.9);
+    --c-black: #000;
+    --c-black-op10: rgba(0,0,0,0.1);
+    --c-black-op20: rgba(0,0,0,0.2);
+    --c-black-op30: rgba(0,0,0,0.3);
+    --c-black-op40: rgba(0,0,0,0.4);
+    --c-black-op50: rgba(0,0,0,0.5);
+
+    /* --- ゲームモードテーマ --- */
+    --c-game-bg: #263238;
+    --c-game-main-bg: rgba(38, 50, 56, 0.8);
+    --c-game-text: #e0e0e0;
+    --c-game-border: #455a64;
+    --c-game-accent-gold: #ffd700;
+    --c-game-accent-cyan: #00e0e0;
+    --c-game-accent-gold-op30: rgba(255, 215, 0, 0.3);
+    --c-game-accent-cyan-op30: rgba(0, 230, 230, 0.3);
+    --c-game-shadow-cyan: rgba(0, 230, 230, 0.2);
+    --c-game-shadow-gold: rgba(255, 215, 0, 0.5);
+    --c-game-shadow-gold-inset: rgba(255, 215, 0, 0.2);
+
+    /* --- コンポーネントカラー --- */
+    --c-btn-classic: #53a2d0;
+    --c-btn-score: #42b442;
+    --c-btn-stats: #d8cb41;
+    --c-btn-guess: #c41e3a;
+    --c-footer-text: #e3dada;
+    --c-placeholder-text: #666; /* プレースホルダー用に色を追加 */
+    --c-suggestion-border: #000000;
+    --c-suggestion-bg-hover: #dadada;
+
+    /* --- 判定カラー --- */
+    --c-correct: #64b46c;
+    --c-partial: #f7d864;
+    --c-wrong: #646464;
+    --c-game-correct-bg: rgba(0, 230, 230, 0.3);
+    --c-game-partial-bg: rgba(255, 215, 0, 0.3);
+    --c-game-wrong-bg: rgba(84, 110, 122, 0.4);
+
+    /* --- ゲームモードコンポーネント --- */
+    --c-game-text-light: #cfd8dc;
+    --c-game-text-medium: #b0bec5;
+    --c-game-text-dark: #9e9e9e;
+    --c-game-border-light: #78909c;
+    --c-game-border-medium: #546e7a;
+    --c-game-border-dark: #455a64;
+    --c-game-row-border: #37474f;
+
+    /* --- スクロールバー --- */
+    --c-scroll-track: #cacaca;
+    --c-scroll-thumb: #777;
+    --c-scroll-thumb-hover: #333;
+    --c-game-scroll-track: #263238;
+    --c-game-scroll-thumb: #546e7a;
+
+    /* --- モーダル --- */
+    --c-modal-bg: #37474f;
+
+    /* --- 縦画面案内 --- */
+    --c-orientation-bg: #222;
+
+    /* --- 矢印カラー --- */
+    --c-arrow-up-red: #e63946;
+    --c-arrow-down-blue: #457b9d;
+}
+
+/* 基本スタイルリセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DotGothic16', sans-serif;
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    overflow: hidden;
+    transition: background-color 0.5s ease;
+}
+
+/* ==========================================================================
+   2. 全体レイアウト & 共通コンポーネント
+   ========================================================================== */
+
+#theme-container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    transition: all 0.5s ease;
+}
+
+#main-content {
+    background-color: var(--c-main-bg);
+    border: 5px solid var(--c-border);
+    border-radius: 10px;
+    box-shadow: inset 4px 4px 0px var(--c-black-op20);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 1600px;
+    height: 90vh;
+    margin: 0.8rem;
+    flex-grow: 0;
+    overflow-y: auto;
+    transition: all 0.5s ease;
+}
+
+#app-header {
+    background: var(--c-header-bg);
+    border-bottom: 2px solid var(--c-border);
+    padding: 0.75rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.5s ease;
+    position: relative; /* ハンバーガーメニューのために追加 */
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: var(--c-white);
+    text-shadow: 2px 2px 0 var(--c-border);
+    transition: all 0.5s ease;
+}
+
+.logo-accent {
+    color: var(--c-accent);
+    transition: all 0.5s ease;
+}
+
+.header-button {
+    background-color: var(--c-border);
+    color: var(--c-white);
+    padding: 0.3rem 0.8rem;
+    border: 2px solid var(--c-border);
+    border-radius: 4px;
+    box-shadow: inset -2px -2px 0px var(--c-black-op50);
+    transition: all 0.1s;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.header-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+#app-footer {
+    background: var(--c-header-bg);
+    border-top: 2px solid var(--c-border);
+    padding: 0.5rem;
+    text-align: center;
+    color: var(--c-footer-text);
+    text-shadow: 1px 1px 0 var(--c-black);
+    transition: all 0.5s ease;
+}
+
+#p-footer {
+    font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   3. 各画面のデフォルトスタイル
+   ========================================================================== */
+
+#loader-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--c-main-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: opacity 0.5s ease;
+}
+
+#loader-overlay p {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: var(--c-text);
+    letter-spacing: 4px;
+}
+
+.pokeball-loader {
+    width: 60px; height: 60px;
+    background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: spin 1.5s linear infinite;
+}
+
+.selection-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--c-text);
+}
+
+.mode-selection-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.mode-button {
+    border: 4px solid var(--c-border);
+    border-radius: 8px;
+    box-shadow: 4px 4px 0 var(--c-border);
+    color: var(--c-white);
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+    position: relative;
+    text-shadow: 2px 2px 0px var(--c-black-op40);
+}
+
+.mode-button:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+}
+
+.mode-button h3 { font-size: 1.5rem; }
+.mode-button p { font-size: 0.9rem; color: var(--c-white-op90); margin-top: 0.5rem; }
+
+.score-button { background-color: var(--c-btn-score); }
+.classic-button { background-color: var(--c-btn-classic); }
+.stats-button { background-color: var(--c-btn-stats); }
+
+#guess-input {
+    background-color: var(--c-white);
+    border: 2px solid var(--c-border);
+    border-radius: 4px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    flex-grow: 1;
+    font-family: 'DotGothic16', sans-serif;
+    color: var(--c-text);
+}
+#guess-input::placeholder { color: var(--c-placeholder-text); }
+
+
+.guess-button {
+    background-color: var(--c-btn-guess);
+    border: 2px solid var(--c-border);
+    border-radius: 4px;
+    box-shadow: inset -2px -2px 0px var(--c-black-op50);
+    color: var(--c-white);
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+}
+
+.guess-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+#results-area {
+    border: 2px solid var(--c-black-op30);
+    background: var(--c-black-op10);
+    border-radius: 4px;
+    overflow-y: scroll;
+    padding: 0.5rem;
+}
+
+#result-header, .result-row {
+    display: grid;
+    gap: 0.5rem;
+    align-items: center;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 0.25rem;
+}
+
+#result-header {
+    font-weight: bold;
+    border-bottom: 2px solid var(--c-black-op30);
+    margin-bottom: 0.5rem;
+}
+
+.result-row {
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.result-row > div {
+    padding: 0.5rem 0.2rem;
+    border-radius: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.result-row img {
+    width: 32px; height: 32px;
+    image-rendering: pixelated;
+    margin: 0 auto;
+}
+
+.result-header-classic, .result-row-classic {
+    grid-template-columns: 40px 1.2fr 0.4fr repeat(2, 0.7fr) repeat(3, 1fr) repeat(2, 0.8fr) 0.8fr repeat(2, 0.6fr) 0.5fr 0.6fr 0.5fr;
+    word-break: break-all;
+}
+.result-row-stats, .result-header-stats {
+    grid-template-columns: 40px 1.5fr repeat(6, 1fr);
+}
+
+.bg-green { background-color: var(--c-correct) !important; color: var(--c-white); }
+.bg-yellow { background-color: var(--c-partial) !important; color: var(--c-text); }
+.bg-gray { background-color: var(--c-wrong) !important; color: var(--c-white); }
+
+#score-screen { text-align: center; }
+.score-title { font-size: 2.5rem; margin-bottom: 5rem; }
+.final-score-display { font-size: 4rem; }
+
+/* ==========================================================================
+   4. ゲームモード専用スタイル (`body.game-mode-active`)
+   ========================================================================== */
+
+body.game-mode-active {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    background-color: var(--c-game-bg);
+    background-image: url('https://www.transparenttextures.com/patterns/rocky-wall.png');
+    color: var(--c-game-text);
+}
+
+body.game-mode-active #theme-container {
+    background: var(--c-game-main-bg);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 50px var(--c-game-shadow-cyan);
+    border: 4px solid var(--c-game-border);
+}
+
+body.game-mode-active #app-header {
+    background: transparent;
+    border-bottom: 1px solid var(--c-game-accent-gold-op30);
+    padding: 1rem 2.5rem;
+}
+
+body.game-mode-active .logo {
+    font-family: 'Cinzel', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--c-game-accent-gold);
+    text-shadow: 0 0 8px var(--c-game-accent-gold), 0 0 12px var(--c-game-accent-gold);
+}
+
+body.game-mode-active .logo-accent {
+    color: var(--c-game-accent-cyan);
+    text-shadow: 0 0 8px var(--c-game-accent-cyan), 0 0 12px var(--c-game-accent-cyan);
+}
+
+body.game-mode-active .header-button {
+    background: transparent;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--c-game-border-light);
+    color: var(--c-game-text-light);
+    font-weight: bold;
+    box-shadow: none;
+}
+
+body.game-mode-active .header-button:hover {
+    border-color: var(--c-game-accent-cyan);
+    color: var(--c-game-accent-cyan);
+    box-shadow: 0 0 10px var(--c-game-accent-cyan);
+}
+
+body.game-mode-active #app-footer {
+    background: transparent;
+    border-top: 1px solid var(--c-game-accent-gold-op30);
+    text-shadow: none;
+}
+
+body.game-mode-active #app-footer p { color: var(--c-game-text-dark); }
+
+body.game-mode-active #main-content {
+    background: transparent;
+    border: 2px solid var(--c-game-border-medium);
+    border-radius: 2px;
+    margin: 20px;
+    box-shadow: none;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+#game-container {
+    display: grid;
+    grid-template-rows: min-content min-content min-content min-content 1fr;
+    grid-template-areas: "info" "status" "controls" "message" "results";
+    width: 90%; height: 90%;
+    gap: 1rem;
+    align-self: center;
+}
+
+#game-info-area { grid-area: info; text-align: center; }
+#game-status { grid-area: status; display: flex; justify-content: space-around; font-size: 1.25rem; }
+#game-controls { grid-area: controls; position: relative; width: 100%; max-width: 500px; margin: 0 auto; }
+#message-area { grid-area: message; text-align: center; min-height: 1.5rem; font-weight: bold; }
+#input-area { display: flex; gap: 0.5rem; }
+
+body.game-mode-active #message-area { color: var(--c-game-accent-cyan); }
+
+body.game-mode-active #guess-input {
+    background: var(--c-black-op40);
+    border: 1px solid var(--c-game-border-light);
+    border-radius: 2px;
+    color: var(--c-white);
+    padding: 0.8rem 1.2rem;
+    transition: all 0.3s ease;
+}
+
+body.game-mode-active #guess-input:focus {
+    outline: none;
+    border-color: var(--c-game-accent-cyan);
+    box-shadow: 0 0 8px var(--c-game-accent-cyan);
+}
+
+body.game-mode-active .guess-button,
+body.game-mode-active .action-button,
+body.game-mode-active .back-button {
+    border: 1px solid var(--c-game-border-light);
+    color: var(--c-game-text-light);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0.8rem 1.8rem;
+    background: var(--c-black-op20);
+    box-shadow: none;
+}
+
+body.game-mode-active .guess-button:hover,
+body.game-mode-active .action-button:hover,
+body.game-mode-active .back-button:hover {
+    box-shadow: 0 0 10px var(--c-game-accent-cyan);
+    color: var(--c-game-accent-cyan);
+    border-color: var(--c-game-accent-cyan);
+}
+
+body.game-mode-active .guess-button:active,
+body.game-mode-active .action-button:active,
+body.game-mode-active .back-button:active {
+    transform: none;
+}
+
+body.game-mode-active #results-area {
+    display: flex;
+    flex-direction: column;
+    height: 100%; min-height: 0;
+    border: 1px solid var(--c-game-border);
+    background-color: var(--c-black-op20);
+    padding: 0;
+    overflow: hidden;
+}
+
+body.game-mode-active #result-header {
+    flex-shrink: 0;
+    font-weight: bold;
+    color: var(--c-game-accent-gold);
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    background-color: var(--c-black-op30);
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+body.game-mode-active #result-history {
+    overflow-y: scroll;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+body.game-mode-active .result-row {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px solid var(--c-game-row-border);
+    background: transparent;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+body.game-mode-active .result-header-classic,
+body.game-mode-active .result-row-classic {
+    grid-template-columns: 0.6fr 1.2fr 0.4fr repeat(2, 0.7fr) repeat(3, 1fr) repeat(2, 0.8fr) 0.8fr repeat(2, 0.6fr) 0.5fr 0.6fr 0.5fr;
+    word-break: break-all;
+}
+
+body.game-mode-active .result-row-stats,
+body.game-mode-active .result-header-stats {
+    grid-template-columns: 0.6fr 1.5fr repeat(6, 1fr);
+}
+
+body.game-mode-active .bg-green { background-color: var(--c-game-correct-bg) !important; color: var(--c-white); }
+body.game-mode-active .bg-yellow { background-color: var(--c-game-partial-bg) !important; color: var(--c-white); }
+body.game-mode-active .bg-gray { background-color: var(--c-game-wrong-bg) !important; color: var(--c-game-text-medium); }
+
+body.game-mode-active .score-card {
+    background-color: var(--c-black-op30);
+    border: 1px solid var(--c-game-border-medium);
+    padding: 2rem;
+}
+
+body.game-mode-active .score-title { color: var(--c-white); }
+
+body.game-mode-active #score-screen .mode-button {
+    border: 2px solid var(--c-game-border-dark);
+    background: transparent;
+    color: var(--c-game-text-medium);
+    box-shadow: none;
+    max-width: 400px;
+}
+
+body.game-mode-active #score-screen .mode-button:hover {
+    border-color: var(--c-game-accent-gold);
+    color: var(--c-game-accent-gold);
+    box-shadow: 0 0 20px var(--c-game-shadow-gold), inset 0 0 10px var(--c-game-shadow-gold-inset);
+}
+
+.text-red {
+    color: var(--c-arrow-up-red);
+    font-weight: bold;
+}
+
+.text-blue {
+    color: var(--c-arrow-down-blue);
+    font-weight: bold;
+}
+
+.form-name {
+    font-size: 0.5em;
+    font-weight: normal;
+}
+
+body.game-mode-active .form-name {
+    color: var(--c-game-text-medium);
+}
+
+/* ==========================================================================
+   5. モーダルウィンドウ & 情報ボタン
+   ========================================================================== */
+
+.info-button {
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 28px; height: 28px;
+    border-radius: 2px;
+    border: 2px solid var(--c-game-border-dark);
+    background-color: var(--c-black-op30);
+    color: var(--c-game-text-medium);
+    font-weight: bold; font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.info-button:hover {
+    border-color: var(--c-game-accent-gold);
+    color: var(--c-game-accent-gold);
+}
+
+#modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: var(--c-game-main-bg);
+    z-index: 40;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    transition: opacity 0.3s ease;
+}
+
+#modal {
+    width: 90%; max-width: 600px;
+    background: var(--c-modal-bg);
+    border: 2px solid var(--c-game-border-light);
+    color: var(--c-game-text);
+    z-index: 50;
+    padding: 2rem;
+    position: relative;
+    border-radius: 2px;
+}
+
+#modal-close-button {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    font-size: 2rem;
+    color: var(--c-game-text-dark);
+    background: none; border: none;
+    cursor: pointer;
+}
+#modal-close-button:hover { color: var(--c-game-accent-gold); }
+
+#modal-content h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--c-game-accent-gold);
+    color: var(--c-game-accent-gold);
+}
+
+#modal-content p, #modal-content li { color: var(--c-game-text-light); }
+#modal-content a { color: var(--c-game-accent-cyan); }
+
+.color-chip {
+    display: inline-block;
+    width: 1em; height: 1em;
+    border: 1px solid var(--c-border);
+    vertical-align: middle;
+    margin-right: 0.5em;
+}
+
+#result-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(38, 50, 56, 0.8);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+}
+
+#result-modal {
+    background: #37474f;
+    border: 2px solid var(--c-game-border-light, #78909c);
+    color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#result-modal-verdict {
+    position: static;
+    transform: none;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    opacity: 1;
+}
+
+.verdict-correct {
+    color: #fff;
+    text-shadow: none;
+}
+
+.verdict-incorrect {
+    color: #fff;
+    text-shadow: none;
+}
+
+#result-modal-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center;     /* 垂直方向の中央揃え */
+    gap: 1.5rem;             /* 画像と名前の間のスペース */
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--c-game-border-light);
+    width: 100%;
+}
+
+.verdict-prefix {
+    font-size: 1.8rem;
+    color: var(--c-game-text-medium);
+    align-self: flex-start;
+    margin-top: 1rem;
+}
+
+.verdict-suffix {
+    font-size: 1.8rem;
+    color: var(--c-game-text-medium);
+    align-self: flex-end;
+    margin-bottom: 1rem;
+}
+
+.pokemon-name-display {
+    text-align: center; 
+}
+
+.pokemon-name-display span {
+    display: block; 
+}
+
+.profile-header img {
+    width: 100px;
+    height: 100px;
+    image-rendering: pixelated;
+}
+
+.sprite-container {
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-header h2 {
+    font-size: 1.5em;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.profile-header .form-name {
+    font-size: 0.5em;
+    color: #bbb;
+}
+
+.profile-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+}
+
+.profile-left h2 {
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.profile-left .form-name {
+    font-size: 0.5em;
+    color: #888;
+}
+
+[data-field="types"] {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.type-badge {
+    display: inline-block;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    background-color: #a8a878;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+.profile-left dl, .profile-right dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1rem;
+    align-items: center;
+}
+.profile-left dt {
+    font-weight: bold;
+    color: #fff;
+}
+
+.profile-right dt {
+    font-weight: bold;
+    color: #ccc;
+}
+
+.stats-list dd {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.stat-bar-bg {
+    flex-grow: 1;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 4px;
+    height: 0.8rem;
+}
+.stat-bar {
+    height: 100%;
+    border-radius: 4px;
+    background-color: #4A90E2;
+    transition: width 0.5s ease-out;
+}
+
+
+/* タイプと特性の2つ目の値は、1つ目の値のすぐ下に配置されるように調整 */
+[data-field="type2"], [data-field="ability2"], [data-field="eggGroup2"] {
+    margin-top: -0.5rem; /* 上の行に近づける */
+}
+
+/* 1. 種族値バーの色を統一 */
+.stat-bar {
+    background-color: #4A90E2; /* 明るい青色に統一 */
+}
+
+.stats-list {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.4rem 0.6rem;
+    align-items: center;
+}
+
+/* 3. タイプボックスの横幅を調整 */
+.type-badge {
+    padding: 0.2em 0.6em; /* 横の余白を少し狭く */
+    min-width: 20px;      /* 最小幅を設定 */
+}
+
+.grid-label {
+    font-weight: bolder;
+    color: #aaa;
+    text-align: left;
+    font-size: 0.9em;
+    align-self: left;
+}
+
+.grid-value {
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* 縦2行を連結するラベルのスタイル */
+.grid-label.span-2-rows {
+    grid-row: span 2;
+    align-self: center; /* 連結されたセル内で上下中央に配置 */
+}
+
+.profile-left img {
+    width: 100px;
+    height: 100px;
+    image-rendering: pixelated;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    grid-column: 1 / -1; /* 画像をグリッド全体に広げて中央配置 */
+    justify-self: center;
+}
+
+.type-badge {
+    display: inline-block;
+    padding: 0.2em 0.6em;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    text-align: center;
+    width: 100%;
+}
+
+.profile-separator {
+    width: 1px;
+    background-color: var(--c-game-border-light);
+}
+
+.profile-left {
+    display: grid;
+    grid-template-columns: auto 1.2fr auto 1fr;
+    gap: 0.67rem 1rem;
+    align-items: center;
+    min-width: 0;
+    flex: 12;
+    padding: 0 0.5rem 0 1.5rem;
+}
+
+.profile-right {
+    border: none;
+    border-radius: 8px;
+    padding: 0 1.0rem 0 1.5rem;
+    background: transparent;
+    flex: 9.5;
+    min-width: 0;
+}
+.profile-right h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: var(--c-game-text-light);
+}
+.stats-list {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.6rem 0.8rem;
+    align-items: center;
+}
+.stat-bar-bg {
+    flex-grow: 1;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 4px;
+    height: 0.8rem;
+}
+.stat-bar {
+    height: 100%;
+    border-radius: 4px;
+    background-color: #4A90E2;
+    transition: width 0.5s ease-out;
+}
+.stats-list dd span {
+    display: inline-block;
+    width: 3ch;
+    text-align: right;
+}
+
+.result-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+#result-modal-left-button,
+#final-score-modal-left-button {
+    font-size: large;
+    font-weight: bold;
+    background-color: #53a2d0;
+    border: 4px solid var(--c-border);
+    border-radius: 8px;
+    box-shadow: 2px 2px 0 var(--c-border);
+    color: var(--c-white);
+    padding: 1.0rem;
+    width: 30%;
+    max-width: 400px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+    position: relative;
+    text-shadow: none;
+}
+
+#result-modal-right-button,
+#final-score-modal-right-button {
+    font-size: large;
+    font-weight: bold;
+    background-color: #64b46c;
+    border: 4px solid var(--c-border);
+    border-radius: 8px;
+    box-shadow: 2px 2px 0 var(--c-border);
+    color: var(--c-white);
+    padding: 1.0rem;
+    width: 30%;
+    max-width: 400px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+/* 4. タイプごとの色設定 */
+.type-normal { background-color: #949495; }
+.type-fire { background-color: #E56B3E; }
+.type-water { background-color: #5184C4; }
+.type-electric { background-color: #F6D851; }
+.type-grass { background-color: #65A945; }
+.type-ice { background-color: #6DC7EA; }
+.type-fighting { background-color: #E09C3F; }
+.type-poison { background-color: #735198; }
+.type-ground { background-color: #9D7843; }
+.type-flying { background-color: #A2C2E6; }
+.type-psychic { background-color: #DC6B7C; }
+.type-bug { background-color: #9FA143; }
+.type-rock { background-color: #BFB888; }
+.type-ghost { background-color: #664970; }
+.type-dragon { background-color: #535CA7; }
+.type-steel { background-color: #6AA9C6; }
+.type-dark { background-color: #4D4948; }
+.type-fairy { background-color: #DAB5D4; }
+
+/* データの日本語名とCSSクラス名を合わせるための調整 */
+.type-ノーマル { background-color: #949495; }
+.type-ほのお { background-color: #E56B3E; }
+.type-みず { background-color: #5184C4; }
+.type-でんき { background-color: #F6D851; }
+.type-くさ { background-color: #65A945; }
+.type-こおり { background-color: #6DC7EA; }
+.type-かくとう { background-color: #E09C3F; }
+.type-どく { background-color: #735198; }
+.type-じめん { background-color: #9D7843; }
+.type-ひこう { background-color: #A2C2E6; }
+.type-エスパー { background-color: #DC6B7C; }
+.type-むし { background-color: #9FA143; }
+.type-いわ { background-color: #BFB888; }
+.type-ゴースト { background-color: #664970; }
+.type-ドラゴン { background-color: #535CA7; }
+.type-はがね { background-color: #6AA9C6; }
+.type-あく { background-color: #4D4948; }
+.type-フェアリー { background-color: #EE99AC; }
+
+/* ==========================================================================
+   6. サジェストボックス
+   ========================================================================== */
+#suggestions-box {
+    position: absolute;
+    top: 50px; left: 0;
+    width: 79%;
+    background-color: var(--c-white);
+    border: 1.5px solid var(--c-suggestion-border);
+    border-radius: 7.5px;
+    box-shadow: 0 4px 8px var(--c-black-op10);
+    z-index: 10;
+    max-height: 245px;
+    overflow-y: auto;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--c-suggestion-border);
+    color: var(--c-text);
+}
+
+.suggestion-item:last-child { border-bottom: none; }
+.suggestion-item:hover { background-color: var(--c-suggestion-bg-hover); }
+
+.suggestion-sprite {
+    width: 32px; height: 32px;
+    margin-right: 12px;
+    image-rendering: pixelated;
+}
+
+body.game-mode-active #suggestions-box {
+    background-color: var(--c-modal-bg);
+    border-color: var(--c-game-border-light);
+    top: 60px;
+}
+body.game-mode-active .suggestion-item {
+    border-bottom-color: var(--c-game-border);
+    color: var(--c-game-text);
+}
+body.game-mode-active .suggestion-item:hover {
+    background-color: var(--c-game-border);
+}
+
+/* ==========================================================================
+   7. 汎用クラス & アニメーション
+   ========================================================================== */
+
+.hidden { display: none !important; }
+.fade-in { animation: fadeIn 0.5s ease-out forwards; }
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes rotate-phone {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(-90deg); }
+    100% { transform: rotate(-90deg); }
+}
+
+/* ==========================================================================
+   8. スクロールバー
+   ========================================================================== */
+
+#result-history::-webkit-scrollbar,
+#suggestions-box::-webkit-scrollbar {
+    width: 12px;
+}
+
+#result-history::-webkit-scrollbar-track { background: var(--c-game-scroll-track); }
+#result-history::-webkit-scrollbar-thumb { background: var(--c-game-scroll-thumb); border: 2px solid var(--c-game-scroll-track); }
+
+#suggestions-box::-webkit-scrollbar { width: 7.5px; }
+#suggestions-box::-webkit-scrollbar-track { background: var(--c-scroll-track); border-radius: 10px; }
+#suggestions-box::-webkit-scrollbar-thumb { background: var(--c-scroll-thumb); border-radius: 10px; }
+#suggestions-box::-webkit-scrollbar-thumb:hover { background: var(--c-scroll-thumb-hover); }
+
+/* ==========================================================================
+   9. レスポンシブ対応 (縦画面表示時の案内)
+   ========================================================================== */
+
+#orientation-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: var(--c-orientation-bg);
+    color: var(--c-white);
+    z-index: 200;
+    font-family: 'DotGothic16', sans-serif;
+}
+
+.orientation-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%; height: 100%;
+    text-align: center;
+}
+
+.orientation-message p { font-size: 1.2rem; line-height: 1.8; }
+
+.phone-icon {
+    width: 64px; height: 100px;
+    border: 3px solid var(--c-white);
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    position: relative;
+    animation: rotate-phone 1.5s ease-in-out infinite;
+}
+
+.phone-icon::before {
+    content: '';
+    position: absolute;
+    top: 8px; left: 50%;
+    transform: translateX(-50%);
+    width: 20px; height: 4px;
+    background-color: var(--c-white);
+    border-radius: 2px;
+}
+
+@media screen and (max-height: 850px) and (orientation: portrait) {
+    #theme-container, #loader-overlay {
+        display: none;
+    }
+    #orientation-overlay {
+        display: block;
+    }
+}
+
+/* ==========================================================================
+   10. 最終スコアモーダル
+   ========================================================================== */
+
+#final-score-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(38, 50, 56, 0.8);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+}
+
+#final-score-modal {
+    background: #37474f;
+    border: 2px solid var(--c-game-border-light, #78909c);
+    color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 1200px; /* 横幅を広げる */
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+#final-score-modal-verdict {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#final-score-header {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--c-game-text-light);
+    margin-bottom: 2rem;
+}
+
+.final-score-content-wrapper {
+    display: flex;
+    justify-content: space-around;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.score-profile-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(0,0,0,0.2);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.score-profile-column h3 {
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.score-profile-column .sprite-container {
+    width: 120px;
+    height: 120px;
+}
+
+/* スコアモード用のステータス表のスタイル */
+.score-status-table {
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr;
+    gap: 0.5rem 1rem;
+    width: 100%;
+}
+
+.score-status-table .grid-label.span-2-rows {
+    grid-row: span 2;
+    align-self: center;
+}
+
+/* 種族値モード用のグラフのスタイル */
+.score-stats-graph {
+    width: 100%;
+}
+
+.score-stats-graph .stats-list {
+    display: grid;
+    gap: 0.4rem 0.6rem;
+    align-items: center;
+    grid-template-columns: auto 1fr;
+}
+
+.score-stats-graph .stats-list dt {
+    min-width: 50px;
+}
+
+#final-score-modal .result-modal-buttons {
+    margin-top: 2.5rem;
+}
+
+#final-score-modal-left-button,
+#final-score-modal-right-button {
+    font-size: large;
+    font-weight: bold;
+    border: 4px solid var(--c-border);
+    border-radius: 8px;
+    box-shadow: 2px 2px 0 var(--c-border);
+    color: var(--c-white);
+    padding: 1.0rem;
+    width: 30%;
+    max-width: 300px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+    position: relative;
+    text-shadow: none;
+}
+
+#final-score-modal-left-button {
+    background-color: #53a2d0;
+}
+
+#final-score-modal-right-button {
+    background-color: #64b46c;
+}
+
+/* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+/* 11. iPhone版レスポンシブ対応 */
+/* (画面幅が768px以下の場合に適用) */
+/* ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ */
+
+@media screen and (max-width: 768px) {
+
+    /* --- 基本設定 --- */
+    body {
+        overflow: auto; /* スクロールを許可 */
+        font-size: 16px; /* 基本フォントサイズを少し大きく */
+    }
+
+    /* --- 全体レイアウト --- */
+    #main-content {
+        width: 95vw; /* 画面幅いっぱいに */
+        height: auto; /* 高さはコンテンツに合わせる */
+        min-height: 85vh;
+        margin: 0.5rem;
+        padding: 1rem;
+        justify-content: flex-start;
+    }
+
+    /* --- ヘッダー & ハンバーガーメニュー --- */
+    #app-header {
+        padding: 0.75rem 1rem;
+    }
+    
+    .header-buttons {
+        display: none; /* PC用のボタンは非表示に */
+    }
+    
+    #hamburger-menu {
+        display: block;
+        width: 40px;
+        height: 32px;
+        cursor: pointer;
+        position: relative;
+        z-index: 100;
+        background: none;
+        border: none;
+    }
+    #hamburger-menu span {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background-color: var(--c-white);
+        border-radius: 4px;
+        transition: all 0.4s;
+    }
+    #hamburger-menu span:nth-of-type(1) { top: 0; }
+    #hamburger-menu span:nth-of-type(2) { top: 14px; }
+    #hamburger-menu span:nth-of-type(3) { bottom: 0; }
+
+    #nav-menu {
+        display: none; /* JSで表示を切り替える */
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 200px;
+        background-color: var(--c-header-bg);
+        border: 2px solid var(--c-border);
+        z-index: 99;
+    }
+    #nav-menu .header-buttons {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    #nav-menu .header-button {
+        width: 100%;
+        border-radius: 0;
+        border-bottom: 1px solid var(--c-border);
+        margin: 0;
+    }
+    #nav-menu .header-button:last-child {
+        border-bottom: none;
+    }
+
+    /* --- フッター --- */
+    #app-footer {
+        display: none; /* フッターは非表示に */
+    }
+
+    /* --- モード選択画面 --- */
+    .selection-title {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+    .mode-button {
+        padding: 1rem;
+        max-width: 90%;
+    }
+    .mode-button h3 { font-size: 1.2rem; }
+
+
+    /* --- ゲーム画面 --- */
+    #game-container {
+        width: 100%;
+        height: auto;
+    }
+    #guess-input {
+        padding: 0.9rem;
+        font-size: 1rem;
+    }
+    .guess-button {
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    /* --- 結果表示エリア (カード型レイアウト) --- */
+    #result-header {
+        display: none; /* PC用のヘッダーは不要なので非表示 */
+    }
+
+    .result-row {
+        display: flex; /* Flexboxに変更 */
+        flex-wrap: wrap; /* 折り返しを許可 */
+        padding: 0.8rem;
+        gap: 0.5rem 1rem; /* 隙間を調整 */
+    }
+    
+    .result-row > div {
+        /* 各項目のスタイル */
+        width: auto;
+        padding: 0.3rem 0.5rem;
+        font-size: 0.9rem;
+        white-space: normal;
+        text-align: left;
+        border-radius: 4px;
+        display: flex; /* ラベルと値を横並びにするため */
+        align-items: center;
+        gap: 0.4em;
+    }
+
+    /* 疑似要素(::before)で各項目にラベルを追加 */
+    .result-row > div::before {
+        font-weight: bold;
+        color: rgba(0,0,0,0.6);
+    }
+    .result-row-classic > div:nth-child(1) { width: 100%; justify-content: center; } /* 画像 */
+    .result-row-classic > div:nth-child(2) { font-size: 1.2rem; font-weight: bold; width: 100%; } /* 名前 */
+    .result-row-classic > div:nth-child(3)::before { content: "世代:"; }
+    .result-row-classic > div:nth-child(4)::before { content: "タイプ1:"; }
+    .result-row-classic > div:nth-child(5)::before { content: "タイプ2:"; }
+    .result-row-classic > div:nth-child(6)::before { content: "特性1:"; }
+    .result-row-classic > div:nth-child(7)::before { content: "特性2:"; }
+    .result-row-classic > div:nth-child(8)::before { content: "夢特性:"; }
+    .result-row-classic > div:nth-child(9)::before { content: "タマゴ1:"; }
+    .result-row-classic > div:nth-child(10)::before { content: "タマゴ2:"; }
+    .result-row-classic > div:nth-child(11)::before { content: "性別比:"; }
+    .result-row-classic > div:nth-child(12)::before { content: "高さ:"; }
+    .result-row-classic > div:nth-child(13)::before { content: "重さ:"; }
+    .result-row-classic > div:nth-child(14)::before { content: "進化:"; }
+    .result-row-classic > div:nth-child(15)::before { content: "合計:"; }
+    .result-row-classic > div:nth-child(16)::before { content: "FC:"; }
+
+    .result-row-stats > div:nth-child(1) { width: 100%; justify-content: center; }
+    .result-row-stats > div:nth-child(2) { font-size: 1.2rem; font-weight: bold; width: 100%; }
+    .result-row-stats > div:nth-child(3)::before { content: "HP:"; }
+    .result-row-stats > div:nth-child(4)::before { content: "攻撃:"; }
+    .result-row-stats > div:nth-child(5)::before { content: "防御:"; }
+    .result-row-stats > div:nth-child(6)::before { content: "特攻:"; }
+    .result-row-stats > div:nth-child(7)::before { content: "特防:"; }
+    .result-row-stats > div:nth-child(8)::before { content: "素早:"; }
+
+
+    /* --- モーダルウィンドウ (縦積みレイアウト) --- */
+    #result-modal, #final-score-modal {
+        width: 95%;
+        padding: 1.5rem 1rem;
+        max-height: 90vh; /* 高さを制限 */
+        overflow-y: auto; /* スクロール可能に */
+    }
+    
+    .profile-header {
+        flex-direction: column; /* ヘッダー内も縦積みに */
+        gap: 0.5rem;
+    }
+
+    .profile-content-wrapper, .final-score-content-wrapper {
+        flex-direction: column; /* 縦積みに変更 */
+        gap: 1.5rem;
+    }
+    
+    .profile-separator {
+        display: none; /* 区切り線は不要 */
+    }
+
+    .profile-left, .profile-right {
+        padding: 0;
+        width: 100%;
+    }
+
+    .result-modal-buttons, #final-score-modal .result-modal-buttons {
+        flex-direction: column; /* ボタンも縦積みに */
+        width: 100%;
+        align-items: center;
+    }
+    #result-modal-left-button, #result-modal-right-button,
+    #final-score-modal-left-button, #final-score-modal-right-button {
+        width: 80%;
+        max-width: 300px;
+    }
+}
