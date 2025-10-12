@@ -31,13 +31,11 @@ const resultModalOverlay = document.getElementById('result-modal-overlay');
 const resultModal = document.getElementById('result-modal');
 const finalScoreModalOverlay = document.getElementById('final-score-modal-overlay');
 const finalScoreModal = document.getElementById('final-score-modal');
-// ▼▼▼ ハンバーガーメニュー用のDOM要素取得を追加 ▼▼▼
 const hamburgerMenu = document.getElementById('hamburger-menu');
 const navMenu = document.getElementById('nav-menu');
 
 
 // --- グローバル変数と定数 ---
-// (省略... 元のコードと同じ)
 const allPokemonNames = Object.keys(allPokemonData);
 let correctPokemon = null;
 let answeredPokemonNames = new Set();
@@ -49,25 +47,21 @@ let totalGuesses = 0;
 let suggestionRequestToken = 0;
 let correctlyAnsweredPokemon = [];
 
-
 // ---------- 初期化処理 ----------
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ▼▼▼ ここからハンバーガーメニューの動作を制御するコード ▼▼▼
+    // ▼▼▼ ハンバーガーメニューの動作を制御するコード ▼▼▼
     hamburgerMenu.addEventListener('click', () => {
-        // is-activeクラスをボタンとメニューに付け外しする
         hamburgerMenu.classList.toggle('is-active');
         navMenu.classList.toggle('is-active');
     });
-    // メニュー内のボタンがクリックされたらメニューを閉じる
     navMenu.querySelectorAll('button').forEach(button => {
         button.addEventListener('click', () => {
             hamburgerMenu.classList.remove('is-active');
             navMenu.classList.remove('is-active');
         });
     });
-    // ▲▲▲ ここまで追加 ▲▲▲
-
+    // ▲▲▲ ハンバーガーメニューのコード ▲▲▲
 
     classicModeButton.addEventListener('click', () => startGame('classic'));
     scoreAttackButton.addEventListener('click', () => startGame('scoreAttack'));
@@ -116,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ---------- ゲーム進行管理 ----------
-// (省略... 元のコードと同じ)
 function startGame(mode) {
     gameMode = mode;
     resetGame();
@@ -189,8 +182,6 @@ function handleGuess() {
     guessInput.focus();
 }
 
-// ... 以降の関数 (endGame, resetGame, showResultModalなど) は元のコードと同じため省略 ...
-// (元のscript.jsのendGame以降のコードをそのままコピーしてください)
 function endGame(isWin) {
     gameOver = true;
     inputArea.classList.add('hidden');
@@ -435,7 +426,7 @@ function generateStatsGraphHTML(pokemon) {
     const stats = {
         'HP': pokemon.stats.hp,
         'こうげき': pokemon.stats.attack,
-        'ぼうぎょ': 'defense',
+        'ぼうぎょ': pokemon.stats.defense,
         'とくこう': pokemon.stats.spAttack,
         'とくぼう': pokemon.stats.spDefense,
         'すばやさ': pokemon.stats.speed
@@ -453,7 +444,7 @@ function generateStatsGraphHTML(pokemon) {
             </dd>
         `;
     }
-    const totalStats = pokemon.totalStats;
+    const totalStats = pokemon.stats.hp + pokemon.stats.attack + pokemon.stats.defense + pokemon.stats.spAttack + pokemon.stats.spDefense + pokemon.stats.speed;
     const totalPercentage = (totalStats / 800) * 100;
     html += `
         <dt>合計</dt>
@@ -481,13 +472,10 @@ function switchScreen(targetScreen) {
 
 
 function setupUIForMode() {
-    resultHeader.innerHTML = '';
     if (gameMode === 'classic' || gameMode === 'scoreAttack') {
         gameTitle.textContent = gameMode === 'classic' ? 'クラシックモード' : 'スコアアタック';
-        // スマホ版ではヘッダーは不要
     } else if (gameMode === 'baseStats') {
         gameTitle.textContent = '種族値アタック';
-        // スマホ版ではヘッダーは不要
     }
     updateStatusUI();
 }
