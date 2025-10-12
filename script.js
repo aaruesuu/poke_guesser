@@ -31,9 +31,13 @@ const resultModalOverlay = document.getElementById('result-modal-overlay');
 const resultModal = document.getElementById('result-modal');
 const finalScoreModalOverlay = document.getElementById('final-score-modal-overlay');
 const finalScoreModal = document.getElementById('final-score-modal');
+// ▼▼▼ ハンバーガーメニュー用のDOM要素取得を追加 ▼▼▼
+const hamburgerMenu = document.getElementById('hamburger-menu');
+const navMenu = document.getElementById('nav-menu');
 
 
 // --- グローバル変数と定数 ---
+// (省略... 元のコードと同じ)
 const allPokemonNames = Object.keys(allPokemonData);
 let correctPokemon = null;
 let answeredPokemonNames = new Set();
@@ -45,8 +49,26 @@ let totalGuesses = 0;
 let suggestionRequestToken = 0;
 let correctlyAnsweredPokemon = [];
 
+
 // ---------- 初期化処理 ----------
 document.addEventListener('DOMContentLoaded', () => {
+
+    // ▼▼▼ ここからハンバーガーメニューの動作を制御するコード ▼▼▼
+    hamburgerMenu.addEventListener('click', () => {
+        // is-activeクラスをボタンとメニューに付け外しする
+        hamburgerMenu.classList.toggle('is-active');
+        navMenu.classList.toggle('is-active');
+    });
+    // メニュー内のボタンがクリックされたらメニューを閉じる
+    navMenu.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+            hamburgerMenu.classList.remove('is-active');
+            navMenu.classList.remove('is-active');
+        });
+    });
+    // ▲▲▲ ここまで追加 ▲▲▲
+
+
     classicModeButton.addEventListener('click', () => startGame('classic'));
     scoreAttackButton.addEventListener('click', () => startGame('scoreAttack'));
     baseStatsModeButton.addEventListener('click', () => startGame('baseStats'));
@@ -94,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ---------- ゲーム進行管理 ----------
-
+// (省略... 元のコードと同じ)
 function startGame(mode) {
     gameMode = mode;
     resetGame();
@@ -116,7 +138,7 @@ function initGame() {
     answeredPokemonNames.add(candidate.name);
     
     // デバッグ用
-    correctPokemon = Object.values(allPokemonData).find(p => p.name === "デオキシス（アタックフォルム）");
+    // correctPokemon = Object.values(allPokemonData).find(p => p.name === "デオキシス（アタックフォルム）");
 
     guessInput.value = "";
     resultHistory.innerHTML = "";
@@ -167,6 +189,8 @@ function handleGuess() {
     guessInput.focus();
 }
 
+// ... 以降の関数 (endGame, resetGame, showResultModalなど) は元のコードと同じため省略 ...
+// (元のscript.jsのendGame以降のコードをそのままコピーしてください)
 function endGame(isWin) {
     gameOver = true;
     inputArea.classList.add('hidden');
@@ -407,18 +431,16 @@ function generateStatusTableHTML(pokemon) {
     `;
 }
 
-// ▼▼▼ この関数を修正 ▼▼▼
 function generateStatsGraphHTML(pokemon) {
     const stats = {
         'HP': pokemon.stats.hp,
         'こうげき': pokemon.stats.attack,
-        'ぼうぎょ': pokemon.stats.defense,
+        'ぼうぎょ': 'defense',
         'とくこう': pokemon.stats.spAttack,
         'とくぼう': pokemon.stats.spDefense,
         'すばやさ': pokemon.stats.speed
     };
     let html = '<dl class="stats-list">';
-    // 6つの種族値の行を生成
     for (const [name, value] of Object.entries(stats)) {
         const percentage = (value / 255) * 100;
         html += `
@@ -431,10 +453,8 @@ function generateStatsGraphHTML(pokemon) {
             </dd>
         `;
     }
-
-    // 合計種族値の行を追加
     const totalStats = pokemon.totalStats;
-    const totalPercentage = (totalStats / 800) * 100; // 合計値の最大値を800としてバーを計算
+    const totalPercentage = (totalStats / 800) * 100;
     html += `
         <dt>合計</dt>
         <dd>
@@ -444,23 +464,17 @@ function generateStatsGraphHTML(pokemon) {
             <span>${totalStats}</span>
         </dd>
     `;
-
     html += '</dl>';
     return html;
 }
-// ▲▲▲ ここまで修正 ▲▲▲
 
-
-// ---------- UI管理 ----------
 function switchScreen(targetScreen) {
     const screens = [modeSelectionScreen, gameContainer, scoreScreen];
     screens.forEach(screen => {
         if (screen.id === targetScreen) {
             screen.classList.remove('hidden');
-            screen.classList.add('fade-in');
         } else {
             screen.classList.add('hidden');
-            screen.classList.remove('fade-in');
         }
     });
 }
@@ -470,40 +484,11 @@ function setupUIForMode() {
     resultHeader.innerHTML = '';
     if (gameMode === 'classic' || gameMode === 'scoreAttack') {
         gameTitle.textContent = gameMode === 'classic' ? 'クラシックモード' : 'スコアアタック';
-        resultHeader.className = 'result-header-classic';
-        resultHeader.innerHTML = `
-            <span>#</span>
-            <span>名前</span>
-            <span>世代</span>
-            <span>タイプ1</span>
-            <span>タイプ2</span>
-            <span>特性1</span>
-            <span>特性2</span>
-            <span>夢特性</span>
-            <span>タマゴ1</span>
-            <span>タマゴ2</span>
-            <span>♂：♀</span>
-            <span>高さ</span>
-            <span>重さ</span>
-            <span>進化</span>
-            <span>合計</span>
-            <span>FC</span>
-            `;
+        // スマホ版ではヘッダーは不要
     } else if (gameMode === 'baseStats') {
         gameTitle.textContent = '種族値アタック';
-        resultHeader.className = 'result-header-stats';
-        resultHeader.innerHTML = `
-            <span>#</span>
-            <span>名前</span>
-            <span>HP</span>
-            <span>攻撃</span>
-            <span>防御</span>
-            <span>特攻</span>
-            <span>特防</span>
-            <span>素早さ</span>
-            `;
+        // スマホ版ではヘッダーは不要
     }
-    resultHeader.classList.remove('hidden');
     updateStatusUI();
 }
 
@@ -519,16 +504,19 @@ function updateStatusUI() {
 
 function renderResult(pokemon, comparisonResult) {
     const row = document.createElement('div');
-    row.classList.add('result-row', 'fade-in');
+    row.classList.add('result-row');
     
     const { main: mainName, form: formName } = formatDisplayName(pokemon.name);
     const displayName = formName ? `${mainName}<br><span class="form-name">${formName}</span>` : mainName;
 
+    let contentHTML = `
+        <div><img src="${pokemon.sprite}" alt="${pokemon.name}"></div>
+        <div>${displayName}</div>
+    `;
+
     if (gameMode === 'baseStats') {
-        row.className = 'result-row result-row-stats';
-        row.innerHTML = `
-            <div><img src="${pokemon.sprite}" alt="${pokemon.name}"></div>
-            <div class="font-bold">${displayName}</div>
+        row.classList.add('result-row-stats');
+        contentHTML += `
             <div class="${comparisonResult.stats.hp.class}"><span>${pokemon.stats.hp}</span> <span class="${comparisonResult.stats.hp.symbolClass}">${comparisonResult.stats.hp.symbol}</span></div>
             <div class="${comparisonResult.stats.attack.class}"><span>${pokemon.stats.attack}</span> <span class="${comparisonResult.stats.attack.symbolClass}">${comparisonResult.stats.attack.symbol}</span></div>
             <div class="${comparisonResult.stats.defense.class}"><span>${pokemon.stats.defense}</span> <span class="${comparisonResult.stats.defense.symbolClass}">${comparisonResult.stats.defense.symbol}</span></div>
@@ -537,10 +525,8 @@ function renderResult(pokemon, comparisonResult) {
             <div class="${comparisonResult.stats.speed.class}"><span>${pokemon.stats.speed}</span> <span class="${comparisonResult.stats.speed.symbolClass}">${comparisonResult.stats.speed.symbol}</span></div>
         `;
     } else {
-        row.className = 'result-row result-row-classic';
-        row.innerHTML = `
-            <div><img src="${pokemon.sprite}" alt="${pokemon.name}"></div>
-            <div class="font-bold">${displayName}</div>
+        row.classList.add('result-row-classic');
+        contentHTML += `
             <div class="${comparisonResult.generation}">${pokemon.generation}</div>
             <div class="${comparisonResult.type1}">${pokemon.type1}</div>
             <div class="${comparisonResult.type2}">${pokemon.type2}</div>
@@ -557,6 +543,7 @@ function renderResult(pokemon, comparisonResult) {
             <div class="${comparisonResult.formsSwitchable}">${pokemon.formsSwitchable ? '○' : '×'}</div>
         `;
     }
+    row.innerHTML = contentHTML;
     resultHistory.insertAdjacentElement('afterbegin', row);
 }
 
@@ -598,9 +585,6 @@ function handleInput() {
         suggestionsBox.classList.add('hidden');
     }
 }
-
-
-// ---------- データ処理 ----------
 
 function normalizePokemonName(input) {
     if (!input) return "";
