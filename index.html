@@ -81,9 +81,9 @@
                 </div>
             </div>
         </main>
-        
-        </div>
-    
+
+    </div>
+
     <div id="modal-overlay" class="hidden">
         <div id="modal">
             <button id="modal-close-button">&times;</button>
@@ -142,7 +142,38 @@
             </div>
         </div>
     </div>
-    
+
+    <div id="final-score-modal-overlay" class="hidden">
+        <div id="final-score-modal">
+            <h1 id="final-score-modal-verdict">GAME CLEAR!</h1>
+            <h2 id="final-score-header"></h2>
+            <div class="final-score-content-wrapper">
+                <div class="score-profile-column">
+                    <div class="sprite-container"><img data-field="final-sprite-0" src="" alt="pokemon-sprite"></div>
+                    <h3 data-field="final-name-0"></h3>
+                    <div class="score-status-table" data-field="final-status-table-0"></div>
+                    <div class="score-stats-graph" data-field="final-stats-graph-0"></div>
+                </div>
+                <div class="score-profile-column">
+                    <div class="sprite-container"><img data-field="final-sprite-1" src="" alt="pokemon-sprite"></div>
+                    <h3 data-field="final-name-1"></h3>
+                    <div class="score-status-table" data-field="final-status-table-1"></div>
+                    <div class="score-stats-graph" data-field="final-stats-graph-1"></div>
+                </div>
+                <div class="score-profile-column">
+                    <div class="sprite-container"><img data-field="final-sprite-2" src="" alt="pokemon-sprite"></div>
+                    <h3 data-field="final-name-2"></h3>
+                    <div class="score-status-table" data-field="final-status-table-2"></div>
+                    <div class="score-stats-graph" data-field="final-stats-graph-2"></div>
+                </div>
+            </div>
+            <div class="result-modal-buttons">
+                <button id="final-score-modal-left-button"></button>
+                <button id="final-score-modal-right-button"></button>
+            </div>
+        </div>
+    </div>
+
     <script src="pokedex-data.js"></script>
     <script src="all-pokemon-data.js"></script>
     <script src="script.js"></script>
