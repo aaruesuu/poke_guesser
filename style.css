@@ -29,6 +29,10 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html {
+    -webkit-text-size-adjust: 100%; /* iOSでの文字サイズ自動調整を無効化 */
+}
+
 body {
     font-family: 'DotGothic16', sans-serif;
     background-color: var(--c-bg);
@@ -65,7 +69,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    position: relative; /* 子要素のposition:absoluteの基準 */
 }
 
 .logo {
@@ -100,13 +104,12 @@ body {
 #hamburger-menu span:nth-of-type(2) { top: 14px; }
 #hamburger-menu span:nth-of-type(3) { bottom: 0; }
 
-/* ハンバーガーメニューがアクティブ（X印）の時のスタイル */
 #hamburger-menu.is-active span:nth-of-type(1) { top: 14px; transform: rotate(45deg); }
 #hamburger-menu.is-active span:nth-of-type(2) { opacity: 0; }
 #hamburger-menu.is-active span:nth-of-type(3) { top: 14px; transform: rotate(-45deg); }
 
 #nav-menu {
-    display: none; /* 初期状態は非表示 */
+    display: none;
     position: absolute;
     top: 100%;
     right: 0;
@@ -116,7 +119,7 @@ body {
     border-bottom: 2px solid var(--c-border);
     z-index: 100;
 }
-#nav-menu.is-active { display: block; } /* アクティブ時に表示 */
+#nav-menu.is-active { display: block; }
 
 #nav-menu .header-buttons {
     display: flex;
@@ -130,7 +133,15 @@ body {
     border-right: none;
     padding: 0.8rem;
     text-align: left;
+    background-color: var(--c-border);
+    color: var(--c-white);
+    border-bottom: 2px solid var(--c-black);
+    font-size: 1rem;
 }
+#nav-menu .header-button:last-child {
+    border-bottom: none;
+}
+
 
 /* ==========================================================================
    3. 各画面スタイル
@@ -158,6 +169,10 @@ body {
     position: relative;
     text-shadow: 2px 2px 0px var(--c-black-op20);
 }
+.mode-button:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+}
 .mode-button h3 { font-size: 1.2rem; }
 .score-button { background-color: var(--c-btn-score); }
 .classic-button { background-color: var(--c-btn-classic); }
@@ -170,11 +185,17 @@ body {
     border: 2px solid var(--c-white);
     background-color: rgba(0,0,0,0.3);
     color: var(--c-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 /* --- ゲーム画面 --- */
-#game-container { padding-top: 1rem; }
+#game-container { padding-top: 1rem; display: flex; flex-direction: column; }
 #game-status { display: flex; justify-content: space-around; margin: 1rem 0; }
+#game-controls { position: relative; }
 #input-area { display: flex; gap: 0.5rem; }
 #guess-input, .guess-button {
     padding: 0.8rem;
@@ -190,12 +211,27 @@ body {
     color: var(--c-white);
     border: 2px solid var(--c-border);
     box-shadow: inset -2px -2px 0px var(--c-black-op50);
+    flex-shrink: 0; /* ボタンが縮まないように */
 }
+.guess-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+.action-buttons { margin-top: 1rem; }
+.action-button, .back-button {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 2px solid var(--c-border);
+    margin-bottom: 0.5rem;
+}
+
 #suggestions-box {
     position: absolute;
     top: 100%;
     left: 0;
-    width: calc(100% - 100px); /* ボタンの幅を避ける */
+    width: 70%; /* ボタンの幅を避ける */
     background-color: var(--c-white);
     border: 1.5px solid var(--c-border);
     border-radius: 7.5px;
@@ -210,6 +246,12 @@ body {
     cursor: pointer;
     border-bottom: 1px solid #ccc;
 }
+.suggestion-item:last-child { border-bottom: none; }
+.suggestion-item:hover { background-color: #eee; }
+.suggestion-sprite { width: 32px; height: 32px; margin-right: 8px; image-rendering: pixelated; }
+
+#message-area { min-height: 1.5em; text-align: center; margin-top: 1rem; font-weight: bold; }
+
 
 /* ==========================================================================
    4. 結果表示 (カード型レイアウト)
@@ -219,7 +261,7 @@ body {
     background: var(--c-black-op10);
     border-radius: 4px;
     padding: 0.5rem;
-    overflow-y: auto; /* コンテンツが多い場合はスクロール */
+    flex-grow: 1; /* 残りの高さを埋める */
 }
 
 .result-row {
@@ -239,15 +281,16 @@ body {
     align-items: center;
     gap: 0.4em;
     min-height: 28px;
+    word-break: break-all;
 }
 .result-row > div::before {
     font-weight: bold;
     opacity: 0.7;
+    flex-shrink: 0;
 }
 
-/* 各項目にラベルを追加 */
 .result-row > div:nth-child(1) { width: 100%; justify-content: center; } /* 画像 */
-.result-row > div:nth-child(2) { font-size: 1.2rem; font-weight: bold; width: 100%; } /* 名前 */
+.result-row > div:nth-child(2) { font-size: 1.2rem; font-weight: bold; width: 100%; justify-content: center; text-align: center; } /* 名前 */
 
 .result-row-classic > div:nth-child(3)::before { content: "世代:"; }
 .result-row-classic > div:nth-child(4)::before { content: "タイプ1:"; }
@@ -280,7 +323,7 @@ body {
 /* ==========================================================================
    5. モーダル (縦積みレイアウト)
    ========================================================================== */
-#modal-overlay, #result-modal-overlay {
+#modal-overlay, #result-modal-overlay, #final-score-modal-overlay {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
@@ -291,7 +334,7 @@ body {
     align-items: center;
     padding: 1rem;
 }
-#modal, #result-modal {
+#modal, #result-modal, #final-score-modal {
     background: #37474f;
     color: #fff;
     padding: 1.5rem 1rem;
@@ -302,8 +345,15 @@ body {
     overflow-y: auto;
     position: relative;
 }
-#result-modal-verdict { font-size: 2rem; text-align: center; margin-bottom: 1rem; }
+#modal-close-button {
+    position: absolute;
+    top: 0.5rem; right: 0.5rem;
+    font-size: 2rem;
+    color: #fff;
+    background: none; border: none; cursor: pointer;
+}
 
+#result-modal-verdict, #final-score-modal-verdict { font-size: 2rem; text-align: center; margin-bottom: 1rem; }
 .profile-header {
     display: flex;
     flex-direction: column;
@@ -313,17 +363,24 @@ body {
     border-bottom: 1px solid #555;
     margin-bottom: 1rem;
 }
-.profile-header img { width: 96px; height: 96px; }
+.sprite-container {
+    width: 96px; height: 96px; background-color: rgba(255,255,255,0.1); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+}
+.sprite-container img { width: 96px; height: 96px; image-rendering: pixelated; }
 .pokemon-name-display { text-align: center; font-size: 1.5rem; }
+.form-name { font-size: 0.8rem; opacity: 0.8; }
 .verdict-prefix, .verdict-suffix { font-size: 1rem; opacity: 0.8; }
 
-.profile-content-wrapper { display: flex; flex-direction: column; gap: 1.5rem; }
+.profile-content-wrapper, .final-score-content-wrapper { display: flex; flex-direction: column; gap: 1.5rem; }
 .profile-left { display: grid; grid-template-columns: auto 1fr; gap: 0.5rem 1rem; }
 .grid-label { font-weight: bold; opacity: 0.8; text-align: right; }
 .profile-right dt { font-weight: bold; opacity: 0.8; }
 .stats-list { display: grid; grid-template-columns: auto 1fr auto; gap: 0.4rem 0.6rem; align-items: center; }
+.stats-list dd { display: flex; align-items: center; gap: 0.5rem; }
 .stat-bar-bg { flex-grow: 1; background-color: rgba(0,0,0,0.2); border-radius: 4px; height: 0.8rem; }
 .stat-bar { height: 100%; border-radius: 4px; background-color: #4A90E2; }
+.stats-list span { width: 3ch; text-align: right; }
 
 .result-modal-buttons {
     display: flex;
@@ -332,7 +389,8 @@ body {
     margin-top: 2rem;
     align-items: center;
 }
-#result-modal-left-button, #result-modal-right-button {
+#result-modal-left-button, #result-modal-right-button,
+#final-score-modal-left-button, #final-score-modal-right-button {
     width: 90%;
     padding: 1rem;
     font-size: 1rem;
@@ -341,8 +399,12 @@ body {
     border-radius: 8px;
     box-shadow: 2px 2px 0 var(--c-border);
     color: var(--c-white);
+    cursor: pointer;
 }
-#result-modal-left-button { background-color: #53a2d0; }
-#result-modal-right-button { background-color: #64b46c; }
+#result-modal-left-button, #final-score-modal-left-button { background-color: #53a2d0; }
+#result-modal-right-button, #final-score-modal-right-button { background-color: #64b46c; }
+
+#final-score-modal .final-score-content-wrapper { gap: 1rem; }
+#final-score-modal .score-profile-column { background-color: rgba(0,0,0,0.2); border-radius: 8px; padding: 1rem; }
 
 .hidden { display: none !important; }
