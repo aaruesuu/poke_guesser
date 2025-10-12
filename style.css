@@ -39,6 +39,7 @@ body {
     color: var(--c-text);
     overflow-x: hidden; /* 横スクロールを禁止 */
     font-size: 16px;
+    height: 100%;
 }
 
 /* ==========================================================================
@@ -48,7 +49,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100vw;
-    min-height: 100vh;
+    min-height: 100vh; /* 最小でも画面の高さに */
 }
 
 #main-content {
@@ -59,7 +60,16 @@ body {
     width: 95vw;
     margin: 2.5vw;
     padding: 1rem;
-    flex-grow: 1; /* 高さを自動調整 */
+    flex-grow: 1; /* 親要素の残りの高さをすべて埋める */
+    display: flex; /* 子要素をflexで管理 */
+    flex-direction: column; /* 子要素を縦に並べる */
+}
+
+#mode-selection-screen {
+    display: flex; /* Flexboxを有効化 */
+    flex-direction: column; /* 子要素を縦に並べる */
+    justify-content: center; /* 中央揃え */
+    flex-grow: 1; /* 親要素の残りの高さをすべて埋める */
 }
 
 #app-header {
@@ -193,7 +203,12 @@ body {
 }
 
 /* --- ゲーム画面 --- */
-#game-container { padding-top: 1rem; display: flex; flex-direction: column; }
+#game-container {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* 高さを埋める */
+}
 #game-status { display: flex; justify-content: space-around; margin: 1rem 0; }
 #game-controls { position: relative; }
 #input-area { display: flex; gap: 0.5rem; }
