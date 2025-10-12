@@ -18,7 +18,7 @@ const modalCloseButton = document.getElementById('modal-close-button');
 const guessInput = document.getElementById('guess-input');
 const messageArea = document.getElementById('message-area');
 const resultHistory = document.getElementById('result-history');
-const resultHeader = document.getElementById('result-header');
+// const resultHeader = document.getElementById('result-header'); // この要素はもう存在しない
 const gameControls = document.getElementById('game-controls');
 const inputArea = document.getElementById('input-area');
 const suggestionsBox = document.getElementById('suggestions-box');
@@ -130,9 +130,6 @@ function initGame() {
     correctPokemon = candidate;
     answeredPokemonNames.add(candidate.name);
     
-    // デバッグ用
-    // correctPokemon = Object.values(allPokemonData).find(p => p.name === "デオキシス（アタックフォルム）");
-
     guessInput.value = "";
     resultHistory.innerHTML = "";
     messageArea.textContent = "";
@@ -205,7 +202,6 @@ function resetGame() {
     correctlyAnsweredPokemon = [];
     messageArea.textContent = '';
     resultHistory.innerHTML = '';
-    resultHeader.classList.add('hidden');
     inputArea.classList.remove('hidden');
     nextQuestionButton.classList.add('hidden');
     backToMenuButton.classList.add('hidden');
@@ -219,7 +215,6 @@ function showScoreScreen() {
 function showResultModal(pokemon, verdict) {
     const verdictEl = resultModal.querySelector('#result-modal-verdict');
     verdictEl.textContent = verdict;
-    verdictEl.className = (verdict === "正解") ? 'verdict-correct' : 'verdict-incorrect';
 
     const setData = (field, value) => {
         const el = resultModal.querySelector(`[data-field="${field}"]`);
@@ -309,7 +304,7 @@ function setupModalButtons(verdict) {
             };
             newRight.classList.remove('hidden');
         } else {
-            if (correctCount >= 3) {
+            if (correctlyAnsweredPokemon.length >= 3) {
                 newLeft.textContent = 'スコア確認';
                 newLeft.onclick = () => {
                     resultModalOverlay.classList.add('hidden');
@@ -485,7 +480,7 @@ function updateStatusUI() {
         gameStatus.innerHTML = `<div>残り: <span id="guesses-left">${guessesLeft}</span> 回</div>`;
     } else {
         gameStatus.innerHTML = `
-            <div>正解数: <span id="correct-count">${correctCount}</span> / 3</div>
+            <div>正解数: <span id="correct-count">${correctlyAnsweredPokemon.length}</span> / 3</div>
             <div>合計回答数: <span id="total-guesses">${totalGuesses}</span></div>`;
     }
 }
@@ -652,7 +647,11 @@ function comparePokemon(guessed, correct) {
         });
         result.height = createNumericComparison(guessed.height, correct.height);
         result.weight = createNumericComparison(guessed.weight, correct.weight);
-        result.totalStats = createNumericComparison(guessed.totalStats, correct.totalStats);
+        
+        let guessedTotal = guessed.stats.hp + guessed.stats.attack + guessed.stats.defense + guessed.stats.spAttack + guessed.stats.spDefense + guessed.stats.speed;
+        let correctTotal = correct.stats.hp + correct.stats.attack + correct.stats.defense + correct.stats.spAttack + correct.stats.spDefense + correct.stats.speed;
+        result.totalStats = createNumericComparison(guessedTotal, correctTotal);
+        
         return result;
     }
 }
