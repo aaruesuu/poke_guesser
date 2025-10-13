@@ -30,16 +30,18 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
-    -webkit-text-size-adjust: 100%; /* iOSでの文字サイズ自動調整を無効化 */
+    -webkit-text-size-adjust: 100%;
+    height: 100%;
 }
 
 body {
     font-family: 'DotGothic16', sans-serif;
     background-color: var(--c-bg);
     color: var(--c-text);
-    overflow-x: hidden; /* 横スクロールを禁止 */
+    overflow-x: hidden;
     font-size: 16px;
     height: 100%;
+    padding: 2.5vw; /* 背景色が見えるように、ここに余白を設定 */
 }
 
 /* ==========================================================================
@@ -48,28 +50,28 @@ body {
 #theme-container {
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    min-height: 100vh; /* 最小でも画面の高さに */
-}
-
-#main-content {
-    background-color: var(--c-main-bg);
+    width: 100%;
+    height: 100%;
+    background-color: var(--c-main-bg); /* 白いエリアの背景色をコンテナに移動 */
     border: 5px solid var(--c-border);
     border-radius: 10px;
     box-shadow: inset 4px 4px 0px var(--c-black-op20);
-    width: 95vw;
-    margin: 2.5vw;
-    padding: 1rem;
-    flex-grow: 1; /* 親要素の残りの高さをすべて埋める */
-    display: flex; /* 子要素をflexで管理 */
-    flex-direction: column; /* 子要素を縦に並べる */
 }
 
+#main-content {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* main-content内でスクロールさせる */
+}
+
+
 #mode-selection-screen {
-    display: flex; /* Flexboxを有効化 */
-    flex-direction: column; /* 子要素を縦に並べる */
-    justify-content: center; /* 中央揃え */
-    flex-grow: 1; /* 親要素の残りの高さをすべて埋める */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
 }
 
 #app-header {
@@ -79,7 +81,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative; /* 子要素のposition:absoluteの基準 */
+    position: relative;
+    flex-shrink: 0; /* ヘッダーが縮まないように */
 }
 
 .logo {
@@ -277,6 +280,7 @@ body {
     border-radius: 4px;
     padding: 0.5rem;
     flex-grow: 1; /* 残りの高さを埋める */
+    min-height: 150px; /* 結果がない時も最低限の高さを確保 */
 }
 
 .result-row {
@@ -423,3 +427,4 @@ body {
 #final-score-modal .score-profile-column { background-color: rgba(0,0,0,0.2); border-radius: 8px; padding: 1rem; }
 
 .hidden { display: none !important; }
+
