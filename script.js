@@ -127,6 +127,7 @@ function initGame() {
         candidate = allPokemonArray[Math.floor(Math.random() * allPokemonArray.length)];
     } while (answeredPokemonNames.has(candidate.name));
     correctPokemon = candidate;
+    correctPokemon = allPokemonData['カイリュー']; // デバッグ用
     answeredPokemonNames.add(candidate.name);
     
     guessInput.value = "";
@@ -212,16 +213,16 @@ function showScoreScreen() {
 }
 
 function showResultModal(pokemon, verdict) {
-    const verdictEl = resultModal.querySelector('#result-modal-verdict');
+    const verdictEl = resultModal.querySelector('#result-modal-verdict span');
     verdictEl.textContent = verdict;
 
     const setData = (field, value) => {
         const el = resultModal.querySelector(`[data-field="${field}"]`);
         if (el) el.textContent = value;
     };
-    
+
     resultModal.querySelector('[data-field="sprite"]').src = pokemon.sprite;
-    
+
     const { main: mainName, form: formName } = formatDisplayName(pokemon.name);
     setData('name', mainName);
     setData('form', formName);
@@ -238,27 +239,39 @@ function showResultModal(pokemon, verdict) {
             nationalNo = baseForm.id;
         }
     }
-    setData('nationalNo', nationalNo || '---');
+    // No.の表示形式を "No.XXX" に変更
+    setData('nationalNo', nationalNo ? `No. ${String(nationalNo).padStart(4, '0')}` : '---');
 
-    setData('generation', pokemon.generation ? `${pokemon.generation}世代` : '不明');
-    setData('genderRatio', formatGenderRate(pokemon.genderRate));
-    setData('height', pokemon.height ? `${pokemon.height} m` : '不明');
-    setData('weight', pokemon.weight ? `${pokemon.weight} kg` : '不明');
-    setData('evolutionCount', pokemon.evolutionCount !== null ? pokemon.evolutionCount : '不明');
-    setData('formsSwitchable', pokemon.formsSwitchable ? '○' : '×');
-    setData('type1', pokemon.type1 || 'なし');
-    setData('type2', pokemon.type2 || 'なし');
-    setData('ability1', pokemon.ability1 || 'なし');
-    setData('ability2', pokemon.ability2 || 'なし');
-    setData('hiddenAbility', pokemon.hiddenAbility || 'なし');
-    setData('eggGroup1', pokemon.eggGroup1 || 'なし');
-    setData('eggGroup2', pokemon.eggGroup2 || 'なし');
-    
+    // --- 新しいグリッドレイアウトを生成 ---
+    const profileLeft = resultModal.querySelector('.profile-left');
+    const createGridItem = (label, value) => {
+        const displayValue = (value === null || value === 'なし' || value === undefined) ? '—' : value;
+        return `<div class="modal-grid-item"><span class="modal-grid-label">${label}</span><span class="modal-grid-value">${displayValue}</span></div>`;
+    };
+
+    let totalStats = pokemon.stats.hp + pokemon.stats.attack + pokemon.stats.defense + pokemon.stats.spAttack + pokemon.stats.spDefense + pokemon.stats.speed;
+    profileLeft.innerHTML = `
+        ${createGridItem('世代', `${pokemon.generation} 世代`)}
+        ${createGridItem('合計種族値', totalStats)}
+        ${createGridItem('タイプ1', pokemon.type1)}
+        ${createGridItem('タイプ2', pokemon.type2)}
+        ${createGridItem('特性1', pokemon.ability1)}
+        ${createGridItem('特性2', pokemon.ability2)}
+        ${createGridItem('夢特性', pokemon.hiddenAbility)}
+        ${createGridItem('性別比', formatGenderRate(pokemon.genderRate))}
+        ${createGridItem('高さ', `${pokemon.height} m`)}
+        ${createGridItem('重さ', `${pokemon.weight} kg`)}
+        ${createGridItem('タマゴ1', pokemon.eggGroup1)}
+        ${createGridItem('タマゴ2', pokemon.eggGroup2)}
+        ${createGridItem('進化数', pokemon.evolutionCount)}
+        ${createGridItem('FC', pokemon.formsSwitchable ? '○' : '×')}
+    `;
+
+
+    // --- 種族値グラフの処理 (変更なし) ---
     const stats = ['hp', 'attack', 'defense', 'spAttack', 'spDefense', 'speed'];
-    let totalStats = 0;
     stats.forEach(stat => {
         const value = pokemon.stats[stat];
-        totalStats += value;
         setData(stat, value);
         const bar = resultModal.querySelector(`[data-field="${stat}-bar"]`);
         if(bar) {
@@ -266,7 +279,7 @@ function showResultModal(pokemon, verdict) {
             bar.style.width = `${Math.min(percentage, 100)}%`;
         }
     });
-    
+
     setData('totalStats', totalStats);
     const totalBar = resultModal.querySelector('[data-field="totalStats-bar"]');
     if(totalBar) {
@@ -275,6 +288,18 @@ function showResultModal(pokemon, verdict) {
     }
 
     setupModalButtons(verdict);
+
+    const profileDetails = resultModal.querySelector('.profile-left');
+    const profileStats = resultModal.querySelector('.profile-right');
+
+    if (gameMode === 'classic') {
+        profileStats.classList.add('hidden');
+        profileDetails.style.gridColumn = '1 / -1'; // 2列分の幅を占める
+    } else {
+        profileStats.classList.remove('hidden');
+        profileDetails.style.gridColumn = '';
+    }
+
     resultModalOverlay.classList.remove('hidden');
 }
 
