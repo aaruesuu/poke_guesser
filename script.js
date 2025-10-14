@@ -16,9 +16,7 @@ const aboutSiteButton = document.getElementById('about-site-button');
 const infoButtons = document.querySelectorAll('.info-button');
 const modalCloseButton = document.getElementById('modal-close-button');
 const guessInput = document.getElementById('guess-input');
-const messageArea = document.getElementById('message-area');
 const resultHistory = document.getElementById('result-history');
-// const resultHeader = document.getElementById('result-header'); // この要素はもう存在しない
 const gameControls = document.getElementById('game-controls');
 const inputArea = document.getElementById('input-area');
 const suggestionsBox = document.getElementById('suggestions-box');
@@ -47,6 +45,14 @@ let totalGuesses = 0;
 let suggestionRequestToken = 0;
 let correctlyAnsweredPokemon = [];
 
+const openModal = (title, content) => {
+    const titleHTML = title ? `<h3>${title}</h3>` : '';
+    modalContent.innerHTML = `${titleHTML}<p>${content}</p>`;
+    modalOverlay.classList.remove('hidden');
+};
+
+const closeModal = () => modalOverlay.classList.add('hidden');
+
 // ---------- 初期化処理 ----------
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -61,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.remove('is-active');
         });
     });
-    // ▲▲▲ ハンバーガーメニューのコード ▲▲▲
 
     classicModeButton.addEventListener('click', () => startGame('classic'));
     scoreAttackButton.addEventListener('click', () => startGame('scoreAttack'));
@@ -86,12 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
             suggestionsBox.classList.add('hidden');
         }
     });
-
-    const openModal = (title, content) => {
-        modalContent.innerHTML = `<h3>${title}</h3>${content}`;
-        modalOverlay.classList.remove('hidden');
-    };
-    const closeModal = () => modalOverlay.classList.add('hidden');
 
     howToPlayButton.addEventListener('click', () => openModal('遊び方', `...`));
     aboutSiteButton.addEventListener('click', () => openModal('このサイトについて', `...`));
@@ -132,7 +131,6 @@ function initGame() {
     
     guessInput.value = "";
     resultHistory.innerHTML = "";
-    messageArea.textContent = "";
 }
 
 function handleGuess() {
@@ -149,7 +147,9 @@ function handleGuess() {
     }
 
     if (!guessedPokemon) {
-        messageArea.textContent = "ポケモンが見つかりませんでした。";
+        suggestionsBox.classList.add('hidden');
+        openModal(null, "入力されたポケモンが見つかりませんでした");
+        guessInput.blur();
         return;
     }
 
@@ -200,7 +200,6 @@ function resetGame() {
     correctCount = 0;
     totalGuesses = 0;
     correctlyAnsweredPokemon = [];
-    messageArea.textContent = '';
     resultHistory.innerHTML = '';
     inputArea.classList.remove('hidden');
     nextQuestionButton.classList.add('hidden');
