@@ -176,7 +176,7 @@ function handleGuess() {
 
     suggestionsBox.classList.add('hidden');
     guessInput.value = "";
-    guessInput.focus();
+    guessInput.blur();
 }
 
 function endGame(isWin) {
