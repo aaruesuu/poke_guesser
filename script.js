@@ -485,48 +485,79 @@ function updateStatusUI() {
     }
 }
 
+
 function renderResult(pokemon, comparisonResult) {
     const row = document.createElement('div');
     row.classList.add('result-row');
-    
-    const { main: mainName, form: formName } = formatDisplayName(pokemon.name);
-    const displayName = formName ? `${mainName}<br><span class="form-name">${formName}</span>` : mainName;
 
-    let contentHTML = `
-        <div><img src="${pokemon.sprite}" alt="${pokemon.name}"></div>
-        <div>${displayName}</div>
+    const { main: mainName, form: formName } = formatDisplayName(pokemon.name);
+    const displayNameHTML = formName ? `${mainName}<br><span class="form-name">${formName}</span>` : mainName;
+
+    const headerHTML = `
+        <div class="result-header">
+            <img src="${pokemon.sprite}" alt="${pokemon.name}" class="result-sprite">
+            <div class="result-name">${displayNameHTML}</div>
+        </div>
     `;
 
+    const bodyContainer = document.createElement('div');
+    bodyContainer.classList.add('result-body');
+
+    let bodyContentHTML = '';
     if (gameMode === 'baseStats') {
         row.classList.add('result-row-stats');
-        contentHTML += `
-            <div class="${comparisonResult.stats.hp.class}"><span>${pokemon.stats.hp}</span> <span class="${comparisonResult.stats.hp.symbolClass}">${comparisonResult.stats.hp.symbol}</span></div>
-            <div class="${comparisonResult.stats.attack.class}"><span>${pokemon.stats.attack}</span> <span class="${comparisonResult.stats.attack.symbolClass}">${comparisonResult.stats.attack.symbol}</span></div>
-            <div class="${comparisonResult.stats.defense.class}"><span>${pokemon.stats.defense}</span> <span class="${comparisonResult.stats.defense.symbolClass}">${comparisonResult.stats.defense.symbol}</span></div>
-            <div class="${comparisonResult.stats.spAttack.class}"><span>${pokemon.stats.spAttack}</span> <span class="${comparisonResult.stats.spAttack.symbolClass}">${comparisonResult.stats.spAttack.symbol}</span></div>
-            <div class="${comparisonResult.stats.spDefense.class}"><span>${pokemon.stats.spDefense}</span> <span class="${comparisonResult.stats.spDefense.symbolClass}">${comparisonResult.stats.spDefense.symbol}</span></div>
-            <div class="${comparisonResult.stats.speed.class}"><span>${pokemon.stats.speed}</span> <span class="${comparisonResult.stats.speed.symbolClass}">${comparisonResult.stats.speed.symbol}</span></div>
+        // 種族値モードは、すべて値と矢印の組み合わせなので、同様に value-wrapper で囲む
+        bodyContentHTML = `
+            <div class="${comparisonResult.stats.hp.class}"><div class="value-wrapper"><span>${pokemon.stats.hp}</span><span class="${comparisonResult.stats.hp.symbolClass}">${comparisonResult.stats.hp.symbol}</span></div></div>
+            <div class="${comparisonResult.stats.attack.class}"><div class="value-wrapper"><span>${pokemon.stats.attack}</span><span class="${comparisonResult.stats.attack.symbolClass}">${comparisonResult.stats.attack.symbol}</span></div></div>
+            <div class="${comparisonResult.stats.defense.class}"><div class="value-wrapper"><span>${pokemon.stats.defense}</span><span class="${comparisonResult.stats.defense.symbolClass}">${comparisonResult.stats.defense.symbol}</span></div></div>
+            <div class="${comparisonResult.stats.spAttack.class}"><div class="value-wrapper"><span>${pokemon.stats.spAttack}</span><span class="${comparisonResult.stats.spAttack.symbolClass}">${comparisonResult.stats.spAttack.symbol}</span></div></div>
+            <div class="${comparisonResult.stats.spDefense.class}"><div class="value-wrapper"><span>${pokemon.stats.spDefense}</span><span class="${comparisonResult.stats.spDefense.symbolClass}">${comparisonResult.stats.spDefense.symbol}</span></div></div>
+            <div class="${comparisonResult.stats.speed.class}"><div class="value-wrapper"><span>${pokemon.stats.speed}</span><span class="${comparisonResult.stats.speed.symbolClass}">${comparisonResult.stats.speed.symbol}</span></div></div>
         `;
     } else {
         row.classList.add('result-row-classic');
-        contentHTML += `
+        let totalStats = pokemon.stats.hp + pokemon.stats.attack + pokemon.stats.defense + pokemon.stats.spAttack + pokemon.stats.spDefense + pokemon.stats.speed;
+        
+        // ▼▼▼ ここからHTMLの構造を変更 ▼▼▼
+        bodyContentHTML = `
             <div class="${comparisonResult.generation}">${pokemon.generation}</div>
+            <div class="${comparisonResult.totalStats.class}">
+                <div class="value-wrapper">
+                    <span>${totalStats}</span>
+                    <span class="${comparisonResult.totalStats.symbolClass}">${comparisonResult.totalStats.symbol}</span>
+                </div>
+            </div>
             <div class="${comparisonResult.type1}">${pokemon.type1}</div>
             <div class="${comparisonResult.type2}">${pokemon.type2}</div>
             <div class="${comparisonResult.ability1}" title="${pokemon.ability1}">${pokemon.ability1}</div>
             <div class="${comparisonResult.ability2}" title="${pokemon.ability2}">${pokemon.ability2}</div>
             <div class="${comparisonResult.hiddenAbility}" title="${pokemon.hiddenAbility}">${pokemon.hiddenAbility}</div>
+            <div class="${comparisonResult.genderRate}">${formatGenderRate(pokemon.genderRate)}</div>
+            <div class="${comparisonResult.height.class}">
+                <div class="value-wrapper">
+                    <span>${pokemon.height}m</span>
+                    <span class="${comparisonResult.height.symbolClass}">${comparisonResult.height.symbol}</span>
+                </div>
+            </div>
+            <div class="${comparisonResult.weight.class}">
+                <div class="value-wrapper">
+                    <span>${pokemon.weight}kg</span>
+                    <span class="${comparisonResult.weight.symbolClass}">${comparisonResult.weight.symbol}</span>
+                </div>
+            </div>
             <div class="${comparisonResult.eggGroup1}" title="${pokemon.eggGroup1}">${pokemon.eggGroup1}</div>
             <div class="${comparisonResult.eggGroup2}" title="${pokemon.eggGroup2}">${pokemon.eggGroup2}</div>
-            <div class="${comparisonResult.genderRate}">${formatGenderRate(pokemon.genderRate)}</div>
-            <div class="${comparisonResult.height.class}"><span>${pokemon.height}m</span> <span class="${comparisonResult.height.symbolClass}">${comparisonResult.height.symbol}</span></div>
-            <div class="${comparisonResult.weight.class}"><span>${pokemon.weight}kg</span> <span class="${comparisonResult.weight.symbolClass}">${comparisonResult.weight.symbol}</span></div>
             <div class="${comparisonResult.evolutionCount}">${pokemon.evolutionCount}</div>
-            <div class="${comparisonResult.totalStats.class}"><span>${pokemon.totalStats}</span> <span class="${comparisonResult.totalStats.symbolClass}">${comparisonResult.totalStats.symbol}</span></div>
             <div class="${comparisonResult.formsSwitchable}">${pokemon.formsSwitchable ? '○' : '×'}</div>
         `;
+        // ▲▲▲ ここまで ▲▲▲
     }
-    row.innerHTML = contentHTML;
+
+    bodyContainer.innerHTML = bodyContentHTML;
+    row.innerHTML = headerHTML;
+    row.appendChild(bodyContainer);
+
     resultHistory.insertAdjacentElement('afterbegin', row);
 }
 
@@ -537,6 +568,8 @@ function handleInput() {
         suggestionsBox.classList.add('hidden');
         return;
     }
+
+    suggestionsBox.style.width = `${guessInput.offsetWidth}px`;
 
     const inputTextKana = normalizePokemonName(inputText);
     const suggestions = allPokemonNames.filter(name => normalizePokemonName(name).startsWith(inputTextKana)).slice(0, 50);
@@ -664,3 +697,4 @@ function formatGenderRate(rate) {
     const maleRatio = 100 - femaleRatio;
     return `${maleRatio}:${femaleRatio}`;
 }
+
