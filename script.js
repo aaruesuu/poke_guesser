@@ -264,7 +264,7 @@ function showResultModal(pokemon, verdict) {
         ${createGridItem('タマゴ1', pokemon.eggGroup1)}
         ${createGridItem('タマゴ2', pokemon.eggGroup2)}
         ${createGridItem('進化数', pokemon.evolutionCount)}
-        ${createGridItem('FC', pokemon.formsSwitchable ? '○' : '×')}
+        ${createGridItem('フォルムチェンジ', pokemon.formsSwitchable ? '○' : '×')}
     `;
 
 
@@ -437,7 +437,7 @@ function generateStatusTableHTML(pokemon) {
         <div class="grid-label">特性2</div><div class="grid-value">${pokemon.ability2 || 'なし'}</div>
         <div class="grid-label">進化数</div><div class="grid-value">${pokemon.evolutionCount}</div>
         <div class="grid-label">夢特性</div><div class="grid-value">${pokemon.hiddenAbility || 'なし'}</div>
-        <div class="grid-label">FC</div><div class="grid-value">${pokemon.formsSwitchable ? '○' : '×'}</div>
+        <div class="grid-label">フォルムチェンジ</div><div class="grid-value">${pokemon.formsSwitchable ? '○' : '×'}</div>
     `;
 }
 
@@ -545,7 +545,12 @@ function renderResult(pokemon, comparisonResult) {
         
         // ▼▼▼ ここからHTMLの構造を変更 ▼▼▼
         bodyContentHTML = `
-            <div class="${comparisonResult.generation}">${pokemon.generation}</div>
+            <div class="${comparisonResult.generation.class}">
+                <div class="value-wrapper">
+                    <span>${pokemon.generation}</span>
+                    <span class="${comparisonResult.generation.symbolClass}">${comparisonResult.generation.symbol}</span>
+                </div>
+            </div>
             <div class="${comparisonResult.totalStats.class}">
                 <div class="value-wrapper">
                     <span>${totalStats}</span>
@@ -682,16 +687,43 @@ function comparePokemon(guessed, correct) {
         return result;
     } else {
         const result = {};
-        result.generation = guessed.generation === correct.generation ? 'bg-green' : (Math.abs(guessed.generation - correct.generation) <= 1 ? 'bg-yellow' : 'bg-gray');
+        // result.generation = guessed.generation === correct.generation ? 'bg-green' : (Math.abs(guessed.generation - correct.generation) <= 1 ? 'bg-yellow' : 'bg-gray');
+        result.generation = createNumericComparison(guessed.generation, correct.generation);
         result.evolutionCount = guessed.evolutionCount === correct.evolutionCount ? 'bg-green' : 'bg-gray';
         result.genderRate = guessed.genderRate === correct.genderRate ? 'bg-green' : 'bg-gray';
         result.formsSwitchable = guessed.formsSwitchable === correct.formsSwitchable ? 'bg-green' : 'bg-gray';
         result.type1 = guessed.type1 === correct.type1 ? 'bg-green' : (guessed.type1 === correct.type2 ? 'bg-yellow' : 'bg-gray');
         result.type2 = guessed.type2 === correct.type2 ? 'bg-green' : (guessed.type2 !== 'なし' && guessed.type2 === correct.type1 ? 'bg-yellow' : 'bg-gray');
+        // // タイプ判定ロジック
+        // const correctTypes = [correct.type1, correct.type2];
+        // const type1InCorrect = correctTypes.includes(guessed.type1);
+        // const type2InCorrect = guessed.type2 !== 'なし' && correctTypes.includes(guessed.type2);
+
+        // if (guessed.type1 === correct.type1 && guessed.type2 === correct.type2) {
+        //     // タイプ1, 2が完全に一致
+        //     result.type1 = 'bg-green';
+        //     result.type2 = 'bg-green';
+        // } else if (type1InCorrect || type2InCorrect) {
+        //     // どちらかのタイプが部分的に一致
+        //     // タイプ1が完全に一致する場合のみ緑、それ以外は黄色
+        //     result.type1 = guessed.type1 === correct.type1 ? 'bg-green' : 'bg-yellow';
+        //     // タイプ2が完全に一致する場合のみ緑、それ以外は黄色
+        //     result.type2 = guessed.type2 === correct.type2 ? 'bg-green' : 'bg-yellow';
+        // } else {
+        //     // どちらのタイプも一致しない
+        //     result.type1 = 'bg-gray';
+        //     result.type2 = 'bg-gray';
+        // }
         const correctAbilities = [correct.ability1, correct.ability2, correct.hiddenAbility].filter(a => a !== 'なし');
+        // ['ability1', 'ability2', 'hiddenAbility'].forEach(key => {
+        //     if (guessed[key] === 'なし' && correct[key] === 'なし') result[key] = 'bg-green';
+        //     else if (guessed[key] !== 'なし' && guessed[key] === correct[key]) result[key] = 'bg-green';
+        //     else if (guessed[key] !== 'なし' && correctAbilities.includes(guessed[key])) result[key] = 'bg-yellow';
+        //     else result[key] = 'bg-gray';
+        // });
         ['ability1', 'ability2', 'hiddenAbility'].forEach(key => {
-            if (guessed[key] === 'なし' && correct[key] === 'なし') result[key] = 'bg-green';
-            else if (guessed[key] !== 'なし' && guessed[key] === correct[key]) result[key] = 'bg-green';
+            // 「なし」同士が一致しても緑にしないように、最初のif文を削除
+            if (guessed[key] !== 'なし' && guessed[key] === correct[key]) result[key] = 'bg-green';
             else if (guessed[key] !== 'なし' && correctAbilities.includes(guessed[key])) result[key] = 'bg-yellow';
             else result[key] = 'bg-gray';
         });
@@ -719,6 +751,5 @@ function formatGenderRate(rate) {
     if (rate === 8) return '♀のみ';
     const femaleRatio = rate / 8 * 100;
     const maleRatio = 100 - femaleRatio;
-    return `${maleRatio}:${femaleRatio}`;
+    return `♂${maleRatio}:♀${femaleRatio}`;
 }
-
