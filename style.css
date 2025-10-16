@@ -408,7 +408,7 @@
     .result-row-classic .result-body > div:nth-child(11)::before { content: "タマゴ1"; }
     .result-row-classic .result-body > div:nth-child(12)::before { content: "タマゴ2"; }
     .result-row-classic .result-body > div:nth-child(13)::before { content: "進化数"; }
-    .result-row-classic .result-body > div:nth-child(14)::before { content: "FC"; }
+    .result-row-classic .result-body > div:nth-child(14)::before { content: "フォルムチェンジ"; }
 
     /* 種族値モード */
     .result-row-stats .result-body > div:nth-child(1)::before { content: "HP"; }
