@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poké Guesser</title>
+    <title>Poke Guesser</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
 </head>
 
 <body>
     <header id="app-header">
-        <h1 class="logo">Poké <span class="logo-accent">Guesser</span></h1>
+        <h1 class="logo">Poke <span class="logo-accent">Guesser</span></h1>
         <button id="hamburger-menu" aria-label="メニューを開く">
             <span></span>
             <span></span>
@@ -41,6 +41,9 @@
                         <h3>クラシックモード</h3>
                         <!-- <div class="info-button" data-mode="classic">?</div> -->
                     </button>
+                    <button id="random-start-mode-button" class="mode-button random-button">
+                        <h3>ランダムモード</h3>
+                        <!-- <div class="info-button" data-mode="randomStart">?</div> -->
                     <button id="base-stats-mode-button" class="mode-button stats-button">
                         <h3>種族値モード</h3>
                         <!-- <div class="info-button" data-mode="baseStats">?</div> -->
@@ -59,6 +62,7 @@
                     </div>
                     <div id="game-status"></div>
                     <div id="game-controls">
+                        <button id="random-start-button" class="action-button hidden">スタート</button>
                         <div id="input-area">
                             <input type="text" id="guess-input" placeholder="ポケモンのなまえを入力" autocomplete="off">
                             <button id="guess-button" class="guess-button">GUESS</button>
