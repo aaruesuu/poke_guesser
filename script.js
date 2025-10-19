@@ -757,5 +757,5 @@ function handleRandomStart() {
     // 4. ボタンを非表示にし、入力欄を表示する
     randomStartButton.classList.add('hidden');
     inputArea.classList.remove('hidden'); // ★ disabled解除からhidden解除に変更
-    guessInput.focus();
+    // guessInput.focus();
 }
