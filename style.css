@@ -19,6 +19,7 @@
        --c-btn-classic: #53a2d0;
        --c-btn-score: #42b46c;
        --c-btn-stats: #d8cb41;
+       --c-btn-random: #f57c00;
        --c-btn-guess: #c41e3a;
        --c-correct: #64b46c;
        --c-partial: #f7d864;
@@ -197,6 +198,10 @@
    .score-button { background-color: var(--c-btn-score); }
    .classic-button { background-color: var(--c-btn-classic); }
    .stats-button { background-color: var(--c-btn-stats); }
+   .random-button { background-color: var(--c-btn-random); }
+   #random-start-button {
+        margin-bottom: 0.7rem;
+    }
    .info-button {
        position: absolute;
        top: 8px; right: 8px;
@@ -367,6 +372,10 @@
         gap: 0.5rem 0.5rem; /* 行と列の間隔 */
     }
 
+    .full-width {
+        grid-column: 1 / -1; /* 2列分の幅を占める */
+    }
+
     /* ボディ内の各要素のスタイル */
     .result-body > div {
         padding: 0.4rem 0.5rem;
@@ -386,29 +395,25 @@
 
     /* ボディ内の各要素の「項目名」スタイル */
     .result-body > div::before {
+        font-weight: bold; /* ← この行を追加して文字を太くする */
         opacity: 0.7;
         flex-shrink: 0;
-        font-size: 0.55rem; /* 項目名のフォントサイズを小さく */
-        margin-bottom: 0.15em; /* 項目名と値の間の余白 */
+        font-size: 0.7rem; /* ← 少しサイズを戻して見やすくする */
+        margin-bottom: 0.2em; /* 項目名と値の間の余白 */
     }
 
 
     /* --- 項目名の設定 --- */
     /* クラシックモード */
-    .result-row-classic .result-body > div:nth-child(1)::before { content: "世代"; } /* コロンを削除してスッキリさせる */
+    .result-row-classic .result-body > div:nth-child(1)::before { content: "世代"; }
     .result-row-classic .result-body > div:nth-child(2)::before { content: "合計種族値"; }
-    .result-row-classic .result-body > div:nth-child(3)::before { content: "タイプ1"; }
-    .result-row-classic .result-body > div:nth-child(4)::before { content: "タイプ2"; }
-    .result-row-classic .result-body > div:nth-child(5)::before { content: "特性1"; }
-    .result-row-classic .result-body > div:nth-child(6)::before { content: "特性2"; }
-    .result-row-classic .result-body > div:nth-child(7)::before { content: "夢特性"; }
-    .result-row-classic .result-body > div:nth-child(8)::before { content: "性別比"; }
-    .result-row-classic .result-body > div:nth-child(9)::before { content: "高さ"; }
-    .result-row-classic .result-body > div:nth-child(10)::before { content: "重さ"; }
-    .result-row-classic .result-body > div:nth-child(11)::before { content: "タマゴ1"; }
-    .result-row-classic .result-body > div:nth-child(12)::before { content: "タマゴ2"; }
-    .result-row-classic .result-body > div:nth-child(13)::before { content: "進化数"; }
-    .result-row-classic .result-body > div:nth-child(14)::before { content: "フォルムチェンジ"; }
+    .result-row-classic .result-body > div:nth-child(3)::before { content: "タイプ"; }
+    .result-row-classic .result-body > div:nth-child(4)::before { content: "特性"; }
+    .result-row-classic .result-body > div:nth-child(5)::before { content: "高さ"; }
+    .result-row-classic .result-body > div:nth-child(6)::before { content: "重さ"; }
+    .result-row-classic .result-body > div:nth-child(7)::before { content: "性別比"; }
+    .result-row-classic .result-body > div:nth-child(8)::before { content: "進化数"; }
+    .result-row-classic .result-body > div:nth-child(9)::before { content: "タマゴグループ"; }
 
     /* 種族値モード */
     .result-row-stats .result-body > div:nth-child(1)::before { content: "HP"; }
@@ -537,6 +542,11 @@
     .modal-grid-value {
         font-weight: bold;
     }
+
+    .modal-grid-item.full-width {
+        grid-column: 1 / -1; /* 2列分の幅を占める */
+    }
+
    .profile-right dt { font-weight: bold; opacity: 0.8; }
    .stats-list { display: grid; grid-template-columns: auto 1fr auto; gap: 0.4rem 0.6rem; align-items: center; }
    .stats-list dd { display: flex; align-items: center; gap: 0.5rem; }
