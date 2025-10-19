@@ -190,7 +190,7 @@ function endGame(isWin) {
     gameOver = true;
     inputArea.classList.add('hidden');
     if (isWin) {
-        if (gameMode !== 'classic') {
+        if (gameMode === 'scoreAttack' || gameMode === 'baseStats') {
             correctCount++;
             correctlyAnsweredPokemon.push(correctPokemon);
             updateStatusUI();
@@ -318,7 +318,7 @@ function setupModalButtons(verdict) {
     newRight.classList.add('hidden');
 
     if (verdict === '正解') {
-        if (gameMode === 'classic') {
+        if (gameMode === 'classic' || gameMode === 'randomStart') {
             newLeft.textContent = 'もう一度遊ぶ';
             newLeft.onclick = () => {
                 resultModalOverlay.classList.add('hidden');
