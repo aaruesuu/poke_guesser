@@ -41,7 +41,7 @@ let correctPokemon = null;
 let answeredPokemonNames = new Set();
 let gameMode = null;
 let gameOver = false;
-let guessesLeft = 5;
+let guessesLeft = 7;
 let correctCount = 0;
 let totalGuesses = 0;
 let suggestionRequestToken = 0;
@@ -131,7 +131,7 @@ function initGame() {
         candidate = allPokemonArray[Math.floor(Math.random() * allPokemonArray.length)];
     } while (answeredPokemonNames.has(candidate.name));
     correctPokemon = candidate;
-    correctPokemon = allPokemonData['カイリュー']; // デバッグ用
+    // correctPokemon = allPokemonData['カイリュー']; // デバッグ用
     answeredPokemonNames.add(candidate.name);
     
     guessInput.value = "";
@@ -203,7 +203,7 @@ function endGame(isWin) {
 
 function resetGame() {
     gameOver = false;
-    guessesLeft = 5;
+    guessesLeft = 7;
     correctCount = 0;
     totalGuesses = 0;
     correctlyAnsweredPokemon = [];
