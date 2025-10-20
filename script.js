@@ -131,7 +131,7 @@ function initGame() {
         candidate = allPokemonArray[Math.floor(Math.random() * allPokemonArray.length)];
     } while (answeredPokemonNames.has(candidate.name));
     correctPokemon = candidate;
-    // correctPokemon = allPokemonData['カイリュー']; // デバッグ用
+    correctPokemon = allPokemonData['カイリュー']; // デバッグ用
     answeredPokemonNames.add(candidate.name);
     
     guessInput.value = "";
@@ -221,6 +221,15 @@ function showScoreScreen() {
 function showResultModal(pokemon, verdict) {
     const verdictEl = resultModal.querySelector('#result-modal-verdict span');
     verdictEl.textContent = verdict;
+
+    const crackerImages = resultModal.querySelectorAll('.verdict-cracker-img');
+    if (verdict === '正解') {
+        // 正解の場合はhiddenクラスを削除して表示する
+        crackerImages.forEach(img => img.classList.remove('hidden'));
+    } else {
+        // 正解でない場合はhiddenクラスを追加して非表示にする
+        crackerImages.forEach(img => img.classList.add('hidden'));
+    }
 
     const setData = (field, value) => {
         const el = resultModal.querySelector(`[data-field="${field}"]`);
