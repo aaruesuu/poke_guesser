@@ -472,7 +472,7 @@
         vertical-align: middle; /* テキストと画像の垂直位置を揃える */
         margin-bottom: 0.3rem;
     }
-    .verdict-cracker-img-right {
+    #verdict-cracker-img-right {
         width: 28px;  /* 画像のサイズを調整 (お好みで) */
         height: 28px;
         vertical-align: middle; /* テキストと画像の垂直位置を揃える */
