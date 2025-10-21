@@ -34127,4 +34127,31 @@ const allPokemonData = {
   genderRate: 8,
   formsSwitchable: false
 },
+  'ガチグマ（アカツキ）': {
+  id: 10272,
+  name: "ガチグマ（アカツキ）",
+  generation: 8,
+  type1: "じめん",
+  type2: "ノーマル",
+  height: 2.4,
+  weight: 290,
+  sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10272.png",
+  evolutionCount: 2,
+  stats: {
+    hp: 113,
+    attack: 70,
+    defense: 120,
+    spAttack: 135,
+    spDefense: 65,
+    speed: 52
+  },
+  totalStats: 555,
+  ability1: "しんがん",
+  ability2: "なし",
+  hiddenAbility: "なし",
+  eggGroup1: "陸上",
+  eggGroup2: "なし",
+  genderRate: 4,
+  formsSwitchable: false
+},
 };
