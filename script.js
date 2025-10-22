@@ -41,7 +41,7 @@ let correctPokemon = null;
 let answeredPokemonNames = new Set();
 let gameMode = null;
 let gameOver = false;
-let guessesLeft = 7;
+let guessesLeft = 10;
 let correctCount = 0;
 let totalGuesses = 0;
 let suggestionRequestToken = 0;
@@ -131,7 +131,7 @@ function initGame() {
         candidate = allPokemonArray[Math.floor(Math.random() * allPokemonArray.length)];
     } while (answeredPokemonNames.has(candidate.name));
     correctPokemon = candidate;
-    // correctPokemon = allPokemonData['カイリュー']; // デバッグ用
+    correctPokemon = allPokemonData['カイリュー']; // デバッグ用
     answeredPokemonNames.add(candidate.name);
     
     guessInput.value = "";
@@ -203,7 +203,7 @@ function endGame(isWin) {
 
 function resetGame() {
     gameOver = false;
-    guessesLeft = 7;
+    guessesLeft = 10;
     correctCount = 0;
     totalGuesses = 0;
     correctlyAnsweredPokemon = [];
@@ -605,7 +605,7 @@ function handleInput() {
     suggestionsBox.style.width = `${guessInput.offsetWidth}px`;
 
     const inputTextKana = normalizePokemonName(inputText);
-    const suggestions = allPokemonNames.filter(name => normalizePokemonName(name).startsWith(inputTextKana)).slice(0, 50);
+    const suggestions = allPokemonNames.filter(name => normalizePokemonName(name).startsWith(inputTextKana)).slice(0, 100);
     
     if (currentToken !== suggestionRequestToken) return;
 
