@@ -30023,9 +30023,9 @@ const allPokemonData = {
   genderRate: 1,
   formsSwitchable: false
 },
-  'アローラコラッタ': {
+  'コラッタ（アローラのすがた）': {
   id: 10091,
-  name: "アローラコラッタ",
+  name: "コラッタ（アローラのすがた）",
   generation: 1,
   type1: "あく",
   type2: "ノーマル",
@@ -30050,9 +30050,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローララッタ': {
+  'ラッタ（アローラのすがた）': {
   id: 10092,
-  name: "アローララッタ",
+  name: "ラッタ（アローラのすがた）",
   generation: 1,
   type1: "あく",
   type2: "ノーマル",
@@ -30077,9 +30077,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラライチュウ': {
+  'ライチュウ（アローラのすがた）': {
   id: 10100,
-  name: "アローラライチュウ",
+  name: "ライチュウ（アローラのすがた）",
   generation: 1,
   type1: "でんき",
   type2: "エスパー",
@@ -30104,9 +30104,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラサンド': {
+  'サンド（アローラのすがた）': {
   id: 10101,
-  name: "アローラサンド",
+  name: "サンド（アローラのすがた）",
   generation: 1,
   type1: "こおり",
   type2: "はがね",
@@ -30131,9 +30131,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラサンドパン': {
+  'サンドパン（アローラのすがた）': {
   id: 10102,
-  name: "アローラサンドパン",
+  name: "サンドパン（アローラのすがた）",
   generation: 1,
   type1: "こおり",
   type2: "はがね",
@@ -30158,9 +30158,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラロコン': {
+  'ロコン（アローラのすがた）': {
   id: 10103,
-  name: "アローラロコン",
+  name: "ロコン（アローラのすがた）",
   generation: 1,
   type1: "こおり",
   type2: "なし",
@@ -30185,9 +30185,9 @@ const allPokemonData = {
   genderRate: 6,
   formsSwitchable: false
 },
-  'アローラキュウコン': {
+  'キュウコン（アローラのすがた）': {
   id: 10104,
-  name: "アローラキュウコン",
+  name: "キュウコン（アローラのすがた）",
   generation: 1,
   type1: "こおり",
   type2: "フェアリー",
@@ -30212,9 +30212,9 @@ const allPokemonData = {
   genderRate: 6,
   formsSwitchable: false
 },
-  'アローラディグダ': {
+  'ディグダ（アローラのすがた）': {
   id: 10105,
-  name: "アローラディグダ",
+  name: "ディグダ（アローラのすがた）",
   generation: 1,
   type1: "じめん",
   type2: "はがね",
@@ -30239,9 +30239,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラダグトリオ': {
+  'ダグトリオ（アローラのすがた）': {
   id: 10106,
-  name: "アローラダグトリオ",
+  name: "ダグトリオ（アローラのすがた）",
   generation: 1,
   type1: "じめん",
   type2: "はがね",
@@ -30266,9 +30266,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラニャース': {
+  'ニャース（アローラのすがた）': {
   id: 10107,
-  name: "アローラニャース",
+  name: "ニャース（アローラのすがた）",
   generation: 1,
   type1: "あく",
   type2: "なし",
@@ -30293,9 +30293,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラペルシアン': {
+  'ペルシアン（アローラのすがた）': {
   id: 10108,
-  name: "アローラペルシアン",
+  name: "ペルシアン（アローラのすがた）",
   generation: 1,
   type1: "あく",
   type2: "なし",
@@ -30320,9 +30320,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローライシツブテ': {
+  'イシツブテ（アローラのすがた）': {
   id: 10109,
-  name: "アローライシツブテ",
+  name: "イシツブテ（アローラのすがた）",
   generation: 1,
   type1: "いわ",
   type2: "でんき",
@@ -30347,9 +30347,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラゴローン': {
+  'ゴローン（アローラのすがた）': {
   id: 10110,
-  name: "アローラゴローン",
+  name: "ゴローン（アローラのすがた）",
   generation: 1,
   type1: "いわ",
   type2: "でんき",
@@ -30374,9 +30374,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラゴローニャ': {
+  'ゴローニャ（アローラのすがた）': {
   id: 10111,
-  name: "アローラゴローニャ",
+  name: "ゴローニャ（アローラのすがた）",
   generation: 1,
   type1: "いわ",
   type2: "でんき",
@@ -30401,9 +30401,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラベトベター': {
+  'ベトベター（アローラのすがた）': {
   id: 10112,
-  name: "アローラベトベター",
+  name: "ベトベター（アローラのすがた）",
   generation: 1,
   type1: "どく",
   type2: "あく",
@@ -30428,9 +30428,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラベトベトン': {
+  'ベトベトン（アローラのすがた）': {
   id: 10113,
-  name: "アローラベトベトン",
+  name: "ベトベトン（アローラのすがた）",
   generation: 1,
   type1: "どく",
   type2: "あく",
@@ -30455,9 +30455,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラナッシー': {
+  'ナッシー（アローラのすがた）': {
   id: 10114,
-  name: "アローラナッシー",
+  name: "ナッシー（アローラのすがた）",
   generation: 1,
   type1: "くさ",
   type2: "ドラゴン",
@@ -30482,9 +30482,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'アローラガラガラ': {
+  'ガラガラ（アローラのすがた）': {
   id: 10115,
-  name: "アローラガラガラ",
+  name: "ガラガラ（アローラのすがた）",
   generation: 1,
   type1: "ほのお",
   type2: "ゴースト",
@@ -30509,9 +30509,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルニャース': {
+  'ニャース（ガラルのすがた）': {
   id: 10161,
-  name: "ガラルニャース",
+  name: "ニャース（ガラルのすがた）",
   generation: 1,
   type1: "はがね",
   type2: "なし",
@@ -30536,9 +30536,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルポニータ': {
+  'ポニータ（ガラルのすがた）': {
   id: 10162,
-  name: "ガラルポニータ",
+  name: "ポニータ（ガラルのすがた）",
   generation: 1,
   type1: "エスパー",
   type2: "なし",
@@ -30563,9 +30563,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルギャロップ': {
+  'ギャロップ（ガラルのすがた）': {
   id: 10163,
-  name: "ガラルギャロップ",
+  name: "ギャロップ（ガラルのすがた）",
   generation: 1,
   type1: "エスパー",
   type2: "フェアリー",
@@ -30590,9 +30590,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルヤドン': {
+  'ヤドン（ガラルのすがた）': {
   id: 10164,
-  name: "ガラルヤドン",
+  name: "ヤドン（ガラルのすがた）",
   generation: 1,
   type1: "エスパー",
   type2: "なし",
@@ -30617,9 +30617,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルヤドラン': {
+  'ヤドラン（ガラルのすがた）': {
   id: 10165,
-  name: "ガラルヤドラン",
+  name: "ヤドラン（ガラルのすがた）",
   generation: 1,
   type1: "どく",
   type2: "エスパー",
@@ -30644,9 +30644,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: true
 },
-  'ガラルカモネギ': {
+  'カモネギ（ガラルのすがた）': {
   id: 10166,
-  name: "ガラルカモネギ",
+  name: "カモネギ（ガラルのすがた）",
   generation: 1,
   type1: "かくとう",
   type2: "なし",
@@ -30671,9 +30671,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルマタドガス': {
+  'マタドガス（ガラルのすがた）': {
   id: 10167,
-  name: "ガラルマタドガス",
+  name: "マタドガス（ガラルのすがた）",
   generation: 1,
   type1: "どく",
   type2: "フェアリー",
@@ -30698,9 +30698,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルバリヤード': {
+  'バリヤード（ガラルのすがた）': {
   id: 10168,
-  name: "ガラルバリヤード",
+  name: "バリヤード（ガラルのすがた）",
   generation: 1,
   type1: "こおり",
   type2: "エスパー",
@@ -30725,9 +30725,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルフリーザー': {
+  'フリーザー（ガラルのすがた）': {
   id: 10169,
-  name: "ガラルフリーザー",
+  name: "フリーザー（ガラルのすがた）",
   generation: 1,
   type1: "エスパー",
   type2: "ひこう",
@@ -30752,9 +30752,9 @@ const allPokemonData = {
   genderRate: -1,
   formsSwitchable: false
 },
-  'ガラルサンダー': {
+  'サンダー（ガラルのすがた）': {
   id: 10170,
-  name: "ガラルサンダー",
+  name: "サンダー（ガラルのすがた）",
   generation: 1,
   type1: "かくとう",
   type2: "ひこう",
@@ -30779,9 +30779,9 @@ const allPokemonData = {
   genderRate: -1,
   formsSwitchable: false
 },
-  'ガラルファイヤー': {
+  'ファイヤー（ガラルのすがた）': {
   id: 10171,
-  name: "ガラルファイヤー",
+  name: "ファイヤー（ガラルのすがた）",
   generation: 1,
   type1: "あく",
   type2: "ひこう",
@@ -30806,9 +30806,9 @@ const allPokemonData = {
   genderRate: -1,
   formsSwitchable: false
 },
-  'ガラルヤドキング': {
+  'ヤドキング（ガラルのすがた）': {
   id: 10172,
-  name: "ガラルヤドキング",
+  name: "ヤドキング（ガラルのすがた）",
   generation: 2,
   type1: "どく",
   type2: "エスパー",
@@ -30833,9 +30833,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルサニーゴ': {
+  'サニーゴ（ガラルのすがた）': {
   id: 10173,
-  name: "ガラルサニーゴ",
+  name: "サニーゴ（ガラルのすがた）",
   generation: 2,
   type1: "ゴースト",
   type2: "なし",
@@ -30860,9 +30860,9 @@ const allPokemonData = {
   genderRate: 6,
   formsSwitchable: false
 },
-  'ガラルジグザグマ': {
+  'ジグザグマ（ガラルのすがた）': {
   id: 10174,
-  name: "ガラルジグザグマ",
+  name: "ジグザグマ（ガラルのすがた）",
   generation: 3,
   type1: "あく",
   type2: "ノーマル",
@@ -30887,9 +30887,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルマッスグマ': {
+  'マッスグマ（ガラルのすがた）': {
   id: 10175,
-  name: "ガラルマッスグマ",
+  name: "マッスグマ（ガラルのすがた）",
   generation: 3,
   type1: "あく",
   type2: "ノーマル",
@@ -30914,9 +30914,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルダルマッカ': {
+  'ダルマッカ（ガラルのすがた）': {
   id: 10176,
-  name: "ガラルダルマッカ",
+  name: "ダルマッカ（ガラルのすがた）",
   generation: 5,
   type1: "こおり",
   type2: "なし",
@@ -30941,9 +30941,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルヒヒダルマ（スタンダード）': {
+  'ヒヒダルマ（スタンダード）（ガラルのすがた）': {
   id: 10177,
-  name: "ガラルヒヒダルマ（スタンダード）",
+  name: "ヒヒダルマ（スタンダード）（ガラルのすがた）",
   generation: 5,
   type1: "こおり",
   type2: "なし",
@@ -30968,9 +30968,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: true
 },
-  'ガラルヒヒダルマ（ダルマモード）': {
+  'ヒヒダルマ（ダルマモード）（ガラルのすがた）': {
   id: 10178,
-  name: "ガラルヒヒダルマ（ダルマモード）",
+  name: "ヒヒダルマ（ダルマモード）（ガラルのすがた）",
   generation: 5,
   type1: "こおり",
   type2: "ほのお",
@@ -30995,9 +30995,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: true
 },
-  'ガラルマッギョ': {
+  'マッギョ（ガラルのすがた）': {
   id: 10180,
-  name: "ガラルマッギョ",
+  name: "マッギョ（ガラルのすがた）",
   generation: 5,
   type1: "じめん",
   type2: "はがね",
@@ -31022,9 +31022,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ガラルデスマス': {
+  'デスマス（ガラルのすがた）': {
   id: 10179,
-  name: "ガラルデスマス",
+  name: "デスマス（ガラルのすがた）",
   generation: 5,
   type1: "じめん",
   type2: "ゴースト",
@@ -31049,9 +31049,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ヒスイガーディ': {
+  'ガーディ（ヒスイのすがた）': {
   id: 10229,
-  name: "ヒスイガーディ",
+  name: "ガーディ（ヒスイのすがた）",
   generation: 1,
   type1: "ほのお",
   type2: "いわ",
@@ -31076,9 +31076,9 @@ const allPokemonData = {
   genderRate: 2,
   formsSwitchable: false
 },
-  'ヒスイウインディ': {
+  'ウインディ（ヒスイのすがた）': {
   id: 10230,
-  name: "ヒスイウインディ",
+  name: "ウインディ（ヒスイのすがた）",
   generation: 1,
   type1: "ほのお",
   type2: "いわ",
@@ -31103,9 +31103,9 @@ const allPokemonData = {
   genderRate: 2,
   formsSwitchable: false
 },
-  'ヒスイビリリダマ': {
+  'ビリリダマ（ヒスイのすがた）': {
   id: 10231,
-  name: "ヒスイビリリダマ",
+  name: "ビリリダマ（ヒスイのすがた）",
   generation: 1,
   type1: "でんき",
   type2: "くさ",
@@ -31130,9 +31130,9 @@ const allPokemonData = {
   genderRate: -1,
   formsSwitchable: false
 },
-  'ヒスイマルマイン': {
+  'マルマイン（ヒスイのすがた）': {
   id: 10232,
-  name: "ヒスイマルマイン",
+  name: "マルマイン（ヒスイのすがた）",
   generation: 1,
   type1: "でんき",
   type2: "くさ",
@@ -31157,9 +31157,9 @@ const allPokemonData = {
   genderRate: -1,
   formsSwitchable: false
 },
-  'ヒスイバクフーン': {
+  'バクフーン（ヒスイのすがた）': {
   id: 10233,
-  name: "ヒスイバクフーン",
+  name: "バクフーン（ヒスイのすがた）",
   generation: 2,
   type1: "ほのお",
   type2: "ゴースト",
@@ -31184,9 +31184,9 @@ const allPokemonData = {
   genderRate: 1,
   formsSwitchable: false
 },
-  'ヒスイダイケンキ': {
+  'ダイケンキ（ヒスイのすがた）': {
   id: 10236,
-  name: "ヒスイダイケンキ",
+  name: "ダイケンキ（ヒスイのすがた）",
   generation: 5,
   type1: "みず",
   type2: "あく",
@@ -31211,9 +31211,9 @@ const allPokemonData = {
   genderRate: 1,
   formsSwitchable: false
 },
-  'ヒスイジュナイパー': {
+  'ジュナイパー（ヒスイのすがた）': {
   id: 10244,
-  name: "ヒスイジュナイパー",
+  name: "ジュナイパー（ヒスイのすがた）",
   generation: 7,
   type1: "くさ",
   type2: "かくとう",
@@ -31238,9 +31238,9 @@ const allPokemonData = {
   genderRate: 1,
   formsSwitchable: false
 },
-  'ヒスイハリーセン': {
+  'ハリーセン（ヒスイのすがた）': {
   id: 10234,
-  name: "ヒスイハリーセン",
+  name: "ハリーセン（ヒスイのすがた）",
   generation: 2,
   type1: "あく",
   type2: "どく",
@@ -31265,9 +31265,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ヒスイクレベース': {
+  'クレベース（ヒスイのすがた）': {
   id: 10243,
-  name: "ヒスイクレベース",
+  name: "クレベース（ヒスイのすがた）",
   generation: 6,
   type1: "こおり",
   type2: "いわ",
@@ -31292,9 +31292,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ヒスイドレディア': {
+  'ドレディア（ヒスイのすがた）': {
   id: 10237,
-  name: "ヒスイドレディア",
+  name: "ドレディア（ヒスイのすがた）",
   generation: 5,
   type1: "くさ",
   type2: "かくとう",
@@ -31319,9 +31319,9 @@ const allPokemonData = {
   genderRate: 8,
   formsSwitchable: false
 },
-  'ヒスイウォーグル': {
+  'ウォーグル（ヒスイのすがた）': {
   id: 10240,
-  name: "ヒスイウォーグル",
+  name: "ウォーグル（ヒスイのすがた）",
   generation: 5,
   type1: "エスパー",
   type2: "ひこう",
@@ -31346,9 +31346,9 @@ const allPokemonData = {
   genderRate: 0,
   formsSwitchable: false
 },
-  'ヒスイヌメイル': {
+  'ヌメイル（ヒスイのすがた）': {
   id: 10241,
-  name: "ヒスイヌメイル",
+  name: "ヌメイル（ヒスイのすがた）",
   generation: 6,
   type1: "はがね",
   type2: "ドラゴン",
@@ -31373,9 +31373,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ヒスイヌメルゴン': {
+  'ヌメルゴン（ヒスイのすがた）': {
   id: 10242,
-  name: "ヒスイヌメルゴン",
+  name: "ヌメルゴン（ヒスイのすがた）",
   generation: 6,
   type1: "はがね",
   type2: "ドラゴン",
@@ -31400,9 +31400,9 @@ const allPokemonData = {
   genderRate: 4,
   formsSwitchable: false
 },
-  'ヒスイゾロア': {
+  'ゾロア（ヒスイのすがた）': {
   id: 10238,
-  name: "ヒスイゾロア",
+  name: "ゾロア（ヒスイのすがた）",
   generation: 5,
   type1: "ノーマル",
   type2: "ゴースト",
@@ -31427,9 +31427,9 @@ const allPokemonData = {
   genderRate: 1,
   formsSwitchable: false
 },
-  'ヒスイゾロアーク': {
+  'ゾロアーク（ヒスイのすがた）': {
   id: 10239,
-  name: "ヒスイゾロアーク",
+  name: "ゾロアーク（ヒスイのすがた）",
   generation: 5,
   type1: "ノーマル",
   type2: "ゴースト",
@@ -31454,9 +31454,9 @@ const allPokemonData = {
   genderRate: 1,
   formsSwitchable: false
 },
-  'ヒスイニューラ': {
+  'ニューラ（ヒスイのすがた）': {
   id: 10235,
-  name: "ヒスイニューラ",
+  name: "ニューラ（ヒスイのすがた）",
   generation: 2,
   type1: "かくとう",
   type2: "どく",
