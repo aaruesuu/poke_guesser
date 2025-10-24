@@ -131,7 +131,7 @@ function initGame() {
         candidate = allPokemonArray[Math.floor(Math.random() * allPokemonArray.length)];
     } while (answeredPokemonNames.has(candidate.name));
     correctPokemon = candidate;
-    correctPokemon = allPokemonData['カイリュー']; // デバッグ用
+    // correctPokemon = allPokemonData['カイリュー']; // デバッグ用
     answeredPokemonNames.add(candidate.name);
     
     guessInput.value = "";
