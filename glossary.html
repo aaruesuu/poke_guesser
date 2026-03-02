@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用語ミニ辞典 | Poke Guesser</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+    />
+  </head>
+  <body>
+    <header id="app-header">
+      <a class="logo" href="index.html">Poke <span class="logo-accent">Guesser</span></a>
+      <button id="hamburger-menu" aria-label="メニューを開く" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="nav-menu">
+        <div class="header-buttons">
+          <a class="header-button" href="index.html">HOME</a>
+          <a class="header-button" href="settings.html">SETTINGS</a>
+          <a class="header-button" href="about.html">ABOUT</a>
+          <a class="header-button" href="updates.html">UPDATES</a>
+          <a class="header-button" href="faq.html">FAQ</a>
+          <a class="header-button" href="glossary.html" aria-current="page">Glossary</a>
+          <a class="header-button" href="privacy.html">Privacy</a>
+          <a class="header-button" href="terms.html">Terms</a>
+          <a class="header-button" href="contact.html">Contact</a>
+          <a class="header-button" href="credits.html">Credits</a>
+          <a class="header-button" href="profile.html">Profile</a>
+        </div>
+      </nav>
+    </header>
+
+    <div id="theme-container" class="page-shell">
+      <main id="main-content">
+        <div class="page-container">
+          <header class="page-hero">
+            <h1>用語集</h1>
+            <p>ゲーム内でよく見る言葉を短く整理しています。</p>
+          </header>
+
+          <section class="page-card page-content">
+            <div class="term-grid">
+              <article class="term-card">
+                <h3>種族値</h3>
+                <p>ポケモン固有の基本ステータス値です。このサイトでは推測の中心的な手がかりになります。</p>
+              </article>
+              <article class="term-card">
+                <h3>合計種族値</h3>
+                <p>HP〜素早さまで6項目の合計値です。近い数値を持つ候補を絞るときに有効です。</p>
+              </article>
+              <article class="term-card">
+                <h3>タイプ一致（STAB）</h3>
+                <p>ポケモンのタイプと技タイプが一致している状態です。詳細ページの代表技確認にも使えます。</p>
+              </article>
+              <article class="term-card">
+                <h3>単タイプ / 複合タイプ</h3>
+                <p>タイプが1つなら単タイプ、2つなら複合タイプです。候補比較で一致/部分一致に影響します。</p>
+              </article>
+              <article class="term-card">
+                <h3>600族</h3>
+                <p>合計種族値が600のポケモン群の通称です。高種族値帯の推測でよく使われます。</p>
+              </article>
+              <article class="term-card">
+                <h3>進化段階</h3>
+                <p>未進化・中間進化・最終進化などの段階です。進化数や種族値傾向の判断に役立ちます。</p>
+              </article>
+              <article class="term-card">
+                <h3>物理 / 特殊 / 変化技</h3>
+                <p>技の分類です。詳細ページの代表技では分類を日本語で表示しています。</p>
+              </article>
+              <article class="term-card">
+                <h3>状態異常</h3>
+                <p>どく・やけど・まひ・ねむりなどの状態です。補助技の見どころとして扱います。</p>
+              </article>
+              <article class="term-card">
+                <h3>すばやさ</h3>
+                <p>行動順に関わるステータスです。候補比較時に高低の目安として使えます。</p>
+              </article>
+              <article class="term-card">
+                <h3>図鑑説明</h3>
+                <p>各ポケモンの説明文です。個別ページに1件表示し、データが無い場合は空表示になります。</p>
+              </article>
+              <article class="term-card">
+                <h3>分類（○○ポケモン）</h3>
+                <p>図鑑上のカテゴリ名です。個別ページの基本情報に掲載しています。</p>
+              </article>
+              <article class="term-card">
+                <h3>世代</h3>
+                <p>初登場した作品世代の区分です。設定の出題範囲や比較結果に関係します。</p>
+              </article>
+              <article class="term-card">
+                <h3>フォーム</h3>
+                <p>同一ポケモンの姿違いです。見た目や種族値が異なる場合があり、候補精査で重要です。</p>
+              </article>
+              <article class="term-card">
+                <h3>特性 / 隠れ特性</h3>
+                <p>戦闘時に影響する固有能力です。比較項目で一致・部分一致の手がかりになります。</p>
+              </article>
+              <article class="term-card">
+                <h3>レベル技 / バージョン（SVなど）</h3>
+                <p>レベルアップで覚える技と、参照する作品バージョンの情報です。代表技選定はSV優先です。</p>
+              </article>
+            </div>
+          </section>
+
+          <footer id="site-footer">
+            <div class="footer-links">
+              <a class="footer-link" href="privacy.html">Privacy</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="terms.html">Terms</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="contact.html">Contact</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="credits.html">Credits</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="faq.html">FAQ</a>
+            </div>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <div class="footer-copy">© 2026 Poke Guesser</div>
+
+    <script src="js/site-nav.js" defer></script>
+  </body>
+</html>

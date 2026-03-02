@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ABOUT | Poke Guesser</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+    />
+  </head>
+  <body>
+    <header id="app-header">
+      <a class="logo" href="index.html">Poke <span class="logo-accent">Guesser</span></a>
+      <button id="hamburger-menu" aria-label="メニューを開く" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="nav-menu">
+        <div class="header-buttons">
+          <a class="header-button" href="index.html">HOME</a>
+          <a class="header-button" href="settings.html">SETTINGS</a>
+          <a class="header-button" href="about.html" aria-current="page">ABOUT</a>
+          <a class="header-button" href="updates.html">UPDATES</a>
+          <a class="header-button" href="faq.html">FAQ</a>
+          <a class="header-button" href="glossary.html">Glossary</a>
+          <a class="header-button" href="privacy.html">Privacy</a>
+          <a class="header-button" href="terms.html">Terms</a>
+          <a class="header-button" href="contact.html">Contact</a>
+          <a class="header-button" href="credits.html">Credits</a>
+          <a class="header-button" href="profile.html">Profile</a>
+        </div>
+      </nav>
+    </header>
+
+    <div id="theme-container" class="page-shell">
+      <main id="main-content">
+        <div class="page-container">
+          <header class="page-hero">
+            <h1>Poke Guesserとは</h1>
+            <p>ヒントの見方と判定ルールを確認できます。</p>
+          </header>
+
+          <section id="about-pokeguesser-section" class="about-section page-content" aria-labelledby="about-pokeguesser-title">
+            <h3 id="about-pokeguesser-title" class="sr-only">Poke Guesserとは</h3>
+
+            <p>
+              Poke Guesserは、さまざまなヒントを手がかりに<strong>ターゲットとなるポケモンを推測するゲーム</strong>です。<br>
+              回答するたびに表示される色付きのヒントや数値の大小関係を活用し、正解を目指しましょう。
+            </p>
+
+            <h3 class="home-title">ヒントの見方</h3>
+            <ul class="home-bullets">
+              <li>🟩 <strong>緑</strong>：完全一致</li>
+              <li>🟨 <strong>黄</strong>：部分一致</li>
+              <li>⬜ <strong>灰</strong>：不一致</li>
+            </ul>
+
+            <p>
+              高さ・重さ・合計種族値など、数値で表される項目については、
+              <strong>矢印アイコン（▲ / ▼）</strong> によって正解値の方向が示されます。
+            </p>
+            <ul class="home-bullets">
+              <li>▲：正解値の方が大きい</li>
+              <li>▼：正解値の方が小さい</li>
+            </ul>
+
+            <h3 class="home-title">各比較項目の判定ルール</h3>
+
+            <p class="home-subtitle">初登場作品（世代）</p>
+            <ul class="home-bullets">
+              <li>🟩 緑：初登場作品・世代ともに一致</li>
+              <li>🟨 黄：世代のみ一致</li>
+              <li>⬜ 灰：世代が不一致</li>
+            </ul>
+            <p>※数値比較（▲ / ▼）も表示されます。</p>
+
+            <p class="home-subtitle">タイプ / 特性 / タマゴグループ</p>
+            <ul class="home-bullets">
+              <li>🟩 緑：完全一致</li>
+              <li>🟨 黄：部分一致</li>
+              <li>⬜ 灰：不一致</li>
+            </ul>
+
+            <p class="home-subtitle">合計種族値・高さ・重さ</p>
+            <ul class="home-bullets">
+              <li>🟩 緑：完全一致</li>
+              <li>⬜ 灰：不一致</li>
+            </ul>
+            <p>※数値比較（▲ / ▼）も表示されます。</p>
+
+            <p class="home-subtitle">性別比・進化数</p>
+            <ul class="home-bullets">
+              <li>🟩 緑：完全一致</li>
+              <li>⬜ 灰：不一致</li>
+            </ul>
+
+            <p>※作品略称の例：RG / 剣盾 / ZA など</p>
+
+            <h3 class="home-title">遊び方のコツ</h3>
+            <p>
+              すべての条件を一度で満たす必要はありません。<br>
+              まずは<strong>情報量の多いポケモン</strong>を入力し、得られたヒントをもとに
+              候補を少しずつ絞り込んでいくのが、Poke Guesserの基本的な遊び方です。
+            </p>
+
+            <h3 class="home-title">出題範囲</h3>
+            <ul class="home-bullets">
+              <li>全国図鑑 No.1–1025 のポケモン（※一部フォルム違いを含む）</li>
+              <li>メガシンカポケモン</li>
+            </ul>
+            <p>※設定画面から、<strong>初登場作品による出題範囲の絞り込み</strong>が可能です。</p>
+          </section>
+
+          <footer id="site-footer">
+            <div class="footer-links">
+              <a class="footer-link" href="privacy.html">Privacy</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="terms.html">Terms</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="contact.html">Contact</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="credits.html">Credits</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="faq.html">FAQ</a>
+            </div>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <div class="footer-copy">© 2026 Poke Guesser</div>
+
+    <script src="js/site-nav.js" defer></script>
+  </body>
+</html>

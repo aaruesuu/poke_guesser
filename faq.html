@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ | Poke Guesser</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+    />
+  </head>
+  <body>
+    <header id="app-header">
+      <a class="logo" href="index.html">Poke <span class="logo-accent">Guesser</span></a>
+      <button id="hamburger-menu" aria-label="メニューを開く" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="nav-menu">
+        <div class="header-buttons">
+          <a class="header-button" href="index.html">HOME</a>
+          <a class="header-button" href="settings.html">SETTINGS</a>
+          <a class="header-button" href="about.html">ABOUT</a>
+          <a class="header-button" href="updates.html">UPDATES</a>
+          <a class="header-button" href="faq.html" aria-current="page">FAQ</a>
+          <a class="header-button" href="glossary.html">Glossary</a>
+          <a class="header-button" href="privacy.html">Privacy</a>
+          <a class="header-button" href="terms.html">Terms</a>
+          <a class="header-button" href="contact.html">Contact</a>
+          <a class="header-button" href="credits.html">Credits</a>
+          <a class="header-button" href="profile.html">Profile</a>
+        </div>
+      </nav>
+    </header>
+
+    <div id="theme-container" class="page-shell">
+      <main id="main-content">
+        <div class="page-container">
+          <header class="page-hero">
+            <h1>FAQ</h1>
+            <p>よくある質問をまとめています。困ったときに確認してください。</p>
+          </header>
+
+          <section class="page-card page-content faq-list" aria-label="FAQ一覧">
+            <details class="faq-item">
+              <summary>Q. 出題範囲は変更できますか？</summary>
+              <p>A. 変更できます。`settings.html` から初登場作品ごとに絞り込み設定が可能です。</p>
+            </details>
+            <details class="faq-item">
+              <summary>Q. 対戦モードは何ですか？</summary>
+              <p>A. 現在はβ提供です。今後の更新で仕様やUIが変わる可能性があります。</p>
+            </details>
+            <details class="faq-item">
+              <summary>Q. スマホでも遊べますか？</summary>
+              <p>A. スマートフォン表示に対応していますが、機種やブラウザで見え方が変わる場合があります。</p>
+            </details>
+            <details class="faq-item">
+              <summary>Q. 画像が表示されない、重いです。</summary>
+              <p>A. 回線状況やブラウザキャッシュの影響が考えられます。再読み込みをお試しください。</p>
+            </details>
+            <details class="faq-item">
+              <summary>Q. データの出典はどこですか？</summary>
+              <p>A. 主にPokeAPI等を利用しています。概要は運営者情報、詳細はCreditsをご確認ください。</p>
+            </details>
+            <details class="faq-item">
+              <summary>Q. ポケモンの詳細は見られますか？</summary>
+              <p>A. 見られます。ホームのランダムポケモンや各導線から `pokemon/*.html` の個別ページへ移動できます。</p>
+            </details>
+            <details class="faq-item">
+              <summary>Q. 間違いを見つけた/要望を送りたいです。</summary>
+              <p>A. `contact.html` からご連絡ください。内容を確認して順次対応します。</p>
+            </details>
+            <details class="faq-item">
+              <summary>Q. ランダムポケモンはどう決まりますか？</summary>
+              <p>A. ページアクセスや再読み込みのたびにランダムで1体選ばれます。</p>
+            </details>
+            <details class="faq-item">
+              <summary>Q. 図鑑説明や分類の情報はどこで見られますか？</summary>
+              <p>A. 各ポケモンの個別ページに分類・図鑑説明・種族値などを表示しています。</p>
+            </details>
+          </section>
+
+          <footer id="site-footer">
+            <div class="footer-links">
+              <a class="footer-link" href="privacy.html">Privacy</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="terms.html">Terms</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="contact.html">Contact</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="credits.html">Credits</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="faq.html">FAQ</a>
+            </div>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <div class="footer-copy">© 2026 Poke Guesser</div>
+
+    <script src="js/site-nav.js" defer></script>
+  </body>
+</html>
