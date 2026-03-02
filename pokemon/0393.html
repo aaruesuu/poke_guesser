@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ポッチャマ | Poke Guesser</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="icon"
+      href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+    />
+  </head>
+  <body>
+    <header id="app-header">
+      <a class="logo" href="../index.html">Poke <span class="logo-accent">Guesser</span></a>
+      <button id="hamburger-menu" aria-label="メニューを開く" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="nav-menu">
+        <div class="header-buttons">
+          <a class="header-button" href="../index.html">HOME</a>
+          <a class="header-button" href="../play.html">PLAY</a>
+          <a class="header-button" href="../settings.html">SETTINGS</a>
+          <a class="header-button" href="../about.html">ABOUT</a>
+          <a class="header-button" href="../updates.html">UPDATES</a>
+          <a class="header-button" href="../faq.html">FAQ</a>
+          <a class="header-button" href="../glossary.html">用語</a>
+          <a class="header-button" href="../privacy.html">Privacy</a>
+          <a class="header-button" href="../terms.html">Terms</a>
+          <a class="header-button" href="../contact.html">Contact</a>
+          <a class="header-button" href="../credits.html">Credits</a>
+          <a class="header-button" href="../profile.html">運営者情報</a>
+        </div>
+      </nav>
+    </header>
+
+    <div id="theme-container" class="page-shell">
+      <main id="main-content">
+        <div class="page-container">
+          <header class="page-hero">
+            <h1>ポッチャマ</h1>
+            <p>ポケモン個別ページ（No.0393）</p>
+          </header>
+
+
+          <section class="page-card pokemon-search-section" aria-label="ポケモン詳細検索">
+            <form id="pokemon-search-form" class="pokemon-search-form" autocomplete="off">
+              <label class="pokemon-search-label" for="guess-input">ポケモン詳細を検索</label>
+              <div id="game-controls" class="pokemon-search-controls">
+                <div id="input-area">
+                  <input
+                    id="guess-input"
+                    type="text"
+                    autocomplete="off"
+                    placeholder="ポケモン名で検索"
+                  />
+                  <button id="search-button" class="guess-button" type="submit">検索</button>
+                </div>
+                <div id="suggestions-box" class="hidden"></div>
+              </div>
+              <!-- 検索失敗時のみメッセージ表示 -->
+              <p id="pokemon-search-feedback" class="pokemon-search-feedback" aria-live="polite"></p>
+            </form>
+          </section>
+
+
+
+          <section class="page-card pokemon-detail-hero">
+            <div class="pokemon-detail-sprite-wrap">
+              <img class="pokemon-detail-sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/393.png" alt="ポッチャマ" />
+            </div>
+            <div class="pokemon-detail-headline">
+              <p class="pokemon-detail-no">図鑑No: 0393</p>
+              <h2 class="pokemon-detail-name">ポッチャマ</h2>
+              <p class="pokemon-detail-types">タイプ: みず</p>
+            </div>
+          </section>
+
+          <section class="page-card page-content">
+            <h2>基本情報</h2>
+            <table class="pokemon-info-table">
+              <tbody>
+                <tr><th>図鑑No / ID</th><td>0393</td></tr>
+                <tr><th>タイプ</th><td>みず</td></tr>
+                <tr><th>分類</th><td>ペンギンポケモン</td></tr>
+                <tr><th>世代</th><td>4</td></tr>
+                <tr><th>初登場作品</th><td>DP</td></tr>
+                <tr><th>高さ</th><td>0.4m</td></tr>
+                <tr><th>重さ</th><td>5.2kg</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="page-card page-content">
+            <h2>図鑑説明</h2>
+            <p class="dex-flavor-text">せわを やかれる ことが きらい。 トレーナーの しじを きかないので なかよく なるのが むずかしい。</p>
+            <p class="dex-flavor-meta">出典バージョン: x</p>
+          </section>
+
+          <section class="page-card page-content">
+            <h2>種族値</h2>
+            <table class="pokemon-stat-table">
+              <tbody>
+                <tr><th>HP</th><td>53</td></tr>
+                <tr><th>こうげき</th><td>51</td></tr>
+                <tr><th>ぼうぎょ</th><td>53</td></tr>
+                <tr><th>とくこう</th><td>61</td></tr>
+                <tr><th>とくぼう</th><td>56</td></tr>
+                <tr><th>すばやさ</th><td>40</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><th>合計種族値</th><td>314</td></tr>
+              </tfoot>
+            </table>
+          </section>
+
+          <section class="page-card page-content">
+            <h2>代表技</h2>
+            <table class="pokemon-move-table">
+              <thead>
+                <tr>
+                  <th>技名</th>
+                  <th>タイプ</th>
+                  <th>分類</th>
+                  <th>威力</th>
+                  <th>習得Lv</th>
+                </tr>
+              </thead>
+              <tbody>
+<tr>
+                <td>すてみタックル</td>
+                <td>ノーマル</td>
+                <td>物理</td>
+                <td>120</td>
+                <td>43</td>
+              </tr>
+<tr>
+                <td>はねやすめ</td>
+                <td>ひこう</td>
+                <td>変化</td>
+                <td>—</td>
+                <td>25</td>
+              </tr>
+<tr>
+                <td>ハイドロポンプ</td>
+                <td>みず</td>
+                <td>特殊</td>
+                <td>110</td>
+                <td>43</td>
+              </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="page-card page-content">
+            <h2>このゲームでの見どころ</h2>
+            <p>タイプと種族値を手がかりに推理してみよう。</p>
+            <div class="pokemon-detail-cta">
+              <a class="sub-button nav-link-button" href="../play.html">PLAYへ</a>
+              <a class="sub-button nav-link-button" href="../index.html">HOMEへ</a>
+              <a class="sub-button nav-link-button" href="../index.html">次のランダムポケモン</a>
+            </div>
+          </section>
+
+          <nav class="page-card pokemon-detail-neighbors" aria-label="前後のポケモン">
+            <a class="pokemon-detail-neighbor is-prev" href="0392.html"><span class="pokemon-detail-neighbor-arrow">←</span><span class="pokemon-detail-neighbor-name">ゴウカザル</span><img class="pokemon-detail-neighbor-icon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/392.png" alt="ゴウカザル" loading="lazy" decoding="async" /></a>
+            <a class="pokemon-detail-neighbor is-next" href="0394.html"><img class="pokemon-detail-neighbor-icon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/394.png" alt="ポッタイシ" loading="lazy" decoding="async" /><span class="pokemon-detail-neighbor-name">ポッタイシ</span><span class="pokemon-detail-neighbor-arrow">→</span></a>
+          </nav>
+
+          <footer id="site-footer">
+            <div class="footer-links">
+              <a class="footer-link" href="../privacy.html">Privacy</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="../terms.html">Terms</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="../contact.html">Contact</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="../credits.html">Credits</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="../faq.html">FAQ</a>
+            </div>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <div class="footer-copy">© 2026 Poke Guesser</div>
+
+    <script src="../js/site-nav.js" defer></script>
+    <script type="module" src="../js/all-pokemon-data.js"></script>
+    <script type="module" src="../js/pokemon-search.js"></script>
+  </body>
+</html>
