@@ -109,6 +109,72 @@ function toPokemonFileId(id) {
   return numericId > 9999 ? base : base.padStart(4, "0");
 }
 
+function collectBaseNameCandidates(name) {
+  const trimmed = typeof name === "string" ? name.trim() : "";
+  if (!trimmed) return [];
+
+  const candidates = new Set([trimmed]);
+  const formStart = trimmed.indexOf("（");
+  if (formStart > 0) {
+    candidates.add(trimmed.slice(0, formStart).trim());
+  }
+  if (trimmed.startsWith("メガ")) {
+    candidates.add(trimmed.slice("メガ".length).trim());
+  }
+  if (trimmed.startsWith("ゲンシ")) {
+    candidates.add(trimmed.slice("ゲンシ".length).trim());
+  }
+
+  for (const candidate of Array.from(candidates)) {
+    const normalized = candidate.replace(/[XYＸＹ]$/, "").trim();
+    if (normalized) candidates.add(normalized);
+  }
+
+  return Array.from(candidates).filter(Boolean);
+}
+
+function resolveDisplayDexId(pokemon, pokemonList) {
+  const rawId = Number(pokemon?.id);
+  if (!Number.isFinite(rawId)) return null;
+  if (rawId <= 9999) return rawId;
+
+  const nameCandidates = collectBaseNameCandidates(pokemon?.name);
+  let bestRegularId = null;
+  let bestAnyId = null;
+
+  for (const baseName of nameCandidates) {
+    for (const candidate of pokemonList) {
+      const candidateName = typeof candidate?.name === "string" ? candidate.name : "";
+      if (!candidateName) continue;
+      if (candidateName !== baseName && !candidateName.startsWith(`${baseName}（`)) continue;
+
+      const candidateId = Number(candidate.id);
+      if (!Number.isFinite(candidateId)) continue;
+      if (bestAnyId === null || candidateId < bestAnyId) {
+        bestAnyId = candidateId;
+      }
+      if (candidateId <= 9999 && (bestRegularId === null || candidateId < bestRegularId)) {
+        bestRegularId = candidateId;
+      }
+    }
+  }
+
+  return bestRegularId ?? bestAnyId ?? rawId;
+}
+
+function buildDisplayDexIdMap(pokemonList) {
+  const map = new Map();
+  for (const pokemon of pokemonList) {
+    const pokemonId = Number(pokemon?.id);
+    if (!Number.isFinite(pokemonId)) continue;
+    const displayDexId = resolveDisplayDexId(pokemon, pokemonList);
+    if (Number.isFinite(displayDexId)) {
+      map.set(pokemonId, displayDexId);
+    }
+  }
+  return map;
+}
+
 function toNumberOrNull(value) {
   if (value === null || value === undefined) return null;
   const numeric = Number(value);
@@ -373,13 +439,18 @@ function renderPokemonPage(context) {
     pokemon,
     prevPokemon,
     nextPokemon,
+    displayDexIdMap,
     speciesById,
     movesByPokemon,
     movesCacheByName,
     missingMoveNames,
   } = context;
 
-  const idText = toPokemonFileId(pokemon.id);
+  const rawId = Number(pokemon.id);
+  const displayDexId = displayDexIdMap.get(rawId) ?? rawId;
+  const displayDexText = Number.isFinite(displayDexId)
+    ? String(displayDexId).padStart(4, "0")
+    : "0000";
   const spriteHtml = hasMeaningfulValue(pokemon.sprite)
     ? `<img class="pokemon-detail-sprite" src="${escapeHtml(pokemon.sprite)}" alt="${escapeHtml(pokemon.name)}" />`
     : `<p class="pokemon-detail-sprite-fallback">画像なし</p>`;
@@ -430,7 +501,7 @@ function renderPokemonPage(context) {
       <nav id="nav-menu">
         <div class="header-buttons">
           <a class="header-button" href="../index.html">HOME</a>
-          <a class="header-button" href="../play.html">PLAY</a>
+          <a class="header-button" href="../game.html">PLAY</a>
           <a class="header-button" href="../settings.html">SETTINGS</a>
           <a class="header-button" href="../about.html">ABOUT</a>
           <a class="header-button" href="../updates.html">UPDATES</a>
@@ -450,7 +521,7 @@ function renderPokemonPage(context) {
         <div class="page-container">
           <header class="page-hero">
             <h1>${escapeHtml(pokemon.name)}</h1>
-            <p>ポケモン個別ページ（No.${escapeHtml(idText)}）</p>
+            <p>ポケモン個別ページ（No.${escapeHtml(displayDexText)}）</p>
           </header>
 
           <section class="page-card pokemon-search-section" aria-label="ポケモン詳細検索">
@@ -478,7 +549,7 @@ function renderPokemonPage(context) {
               ${spriteHtml}
             </div>
             <div class="pokemon-detail-headline">
-              <p class="pokemon-detail-no">図鑑No: ${escapeHtml(idText)}</p>
+              <p class="pokemon-detail-no">図鑑No: ${escapeHtml(displayDexText)}</p>
               <h2 class="pokemon-detail-name">${escapeHtml(pokemon.name)}</h2>
               <p class="pokemon-detail-types">タイプ: ${escapeHtml(formatTypeText(pokemon))}</p>
             </div>
@@ -488,7 +559,7 @@ function renderPokemonPage(context) {
             <h2>基本情報</h2>
             <table class="pokemon-info-table">
               <tbody>
-                <tr><th>図鑑No / ID</th><td>${escapeHtml(idText)}</td></tr>
+                <tr><th>図鑑No / ID</th><td>${escapeHtml(displayDexText)}</td></tr>
                 <tr><th>タイプ</th><td>${escapeHtml(formatTypeText(pokemon))}</td></tr>
                 <tr><th>分類</th><td>${escapeHtml(genusText)}</td></tr>
                 <tr><th>世代</th><td>${escapeHtml(valueOrDash(generationValue))}</td></tr>
@@ -527,18 +598,9 @@ function renderPokemonPage(context) {
           </section>
 ${representativeMovesSection}
 
-          <section class="page-card page-content">
-            <h2>このゲームでの見どころ</h2>
-            <p>タイプと種族値を手がかりに推理してみよう。</p>
-            <div class="pokemon-detail-cta">
-              <a class="sub-button nav-link-button" href="../play.html">PLAYへ</a>
-              <a class="sub-button nav-link-button" href="../index.html">HOMEへ</a>
-              <a class="sub-button nav-link-button" href="../index.html">次のランダムポケモン</a>
-            </div>
-          </section>
-
           <nav class="page-card pokemon-detail-neighbors" aria-label="前後のポケモン">
             ${renderNeighborLink(prevPokemon, "前のポケモンはありません", "←", "prev")}
+            <a class="pokemon-detail-neighbor pokemon-detail-neighbor-home" href="../index.html">HOMEへ</a>
             ${renderNeighborLink(nextPokemon, "次のポケモンはありません", "→", "next")}
           </nav>
 
@@ -577,6 +639,7 @@ async function clearOldGeneratedFiles() {
 async function main() {
   const pokemonList = await loadPokemonData();
   pokemonList.sort((a, b) => a.id - b.id);
+  const displayDexIdMap = buildDisplayDexIdMap(pokemonList);
 
   const speciesData = await loadJsonIfExists(speciesDataPath);
   const movesCacheData = await loadJsonIfExists(movesCachePath);
@@ -605,6 +668,7 @@ async function main() {
       pokemon,
       prevPokemon,
       nextPokemon,
+      displayDexIdMap,
       speciesById,
       movesByPokemon,
       movesCacheByName,

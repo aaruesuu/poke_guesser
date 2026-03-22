@@ -389,16 +389,27 @@ body {
   width: min(100%, 420px);
 }
 .random-card__play {
-  flex: 1 1 0;
+  flex: 0 1 auto;
   margin-top: 0;
   min-width: 0;
   width: auto;
 }
 .random-card__detail {
-  flex: 1 1 0;
+  flex: 0 1 auto;
   margin-top: 0;
   min-width: 0;
   width: auto;
+}
+.random-card__cta-row .nav-link-button {
+  margin-top: 0;
+  min-width: 0;
+  width: auto;
+  max-width: none;
+  padding: 0.5rem 0.65rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: keep-all;
 }
 .random-card-actions {
   margin-top: 0.8rem;
@@ -626,9 +637,15 @@ body {
 }
 .pokemon-detail-neighbors {
   align-items: center;
-  display: flex;
+  display: grid;
   gap: 0.6rem;
-  justify-content: space-between;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+.pokemon-detail-neighbors > :first-child {
+  justify-self: start;
+}
+.pokemon-detail-neighbors > :last-child {
+  justify-self: end;
 }
 .pokemon-detail-neighbor {
   align-items: center;
@@ -663,6 +680,12 @@ body {
 }
 .pokemon-detail-neighbor-name {
   overflow-wrap: anywhere;
+}
+.pokemon-detail-neighbor-home {
+  font-weight: 700;
+  justify-content: center;
+  justify-self: center;
+  min-width: 120px;
 }
 .pokemon-detail-neighbor.is-disabled {
   cursor: default;
@@ -1120,6 +1143,16 @@ body {
     padding: 0.85rem;
   }
 
+  .random-card__cta-row {
+    gap: 0.4rem;
+    width: 100%;
+  }
+
+  .random-card__cta-row .nav-link-button {
+    font-size: 0.78rem;
+    padding: 0.45rem 0.42rem;
+  }
+
   .random-card__profile-row {
     gap: 0.25rem;
     grid-template-columns: 1fr;
@@ -1131,6 +1164,24 @@ body {
 
   .pokemon-detail-neighbor {
     width: 100%;
+  }
+
+  #site-footer .footer-links {
+    flex-wrap: nowrap;
+    gap: 0;
+    font-size: 0.79rem;
+    overflow-x: auto;
+    justify-content: center;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #site-footer .footer-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  #site-footer .footer-sep {
+    margin: 0 0.12rem;
   }
 }
 
@@ -1809,12 +1860,13 @@ body {
 .footer-links{
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 12px;
+  gap: 6px;
   justify-content: center;
 }
 
 .footer-link{
-  display: inline;
+  display: inline-flex;
+  align-items: center;
   padding: 0;            /* ボタン余白を消す */
   background: none;
   border: 0;
@@ -1822,6 +1874,14 @@ body {
   font: inherit;
   color: inherit;
   white-space: nowrap;   /* 1単語内で改行しない */
+}
+#site-footer .footer-sep {
+  display: inline-block;
+  opacity: 0.82;
+  text-decoration: none;
+}
+#site-footer .footer-link:not(:first-of-type)::before {
+  content: none;
 }
 
 #site-footer {

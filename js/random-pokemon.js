@@ -15,6 +15,59 @@ if (!cardRoot) {
     (pokemon) => pokemon && typeof pokemon.id === "number" && pokemon.name
   );
 
+  function collectBaseNameCandidates(name) {
+    const trimmed = typeof name === "string" ? name.trim() : "";
+    if (!trimmed) return [];
+
+    const candidates = new Set([trimmed]);
+    const formStart = trimmed.indexOf("（");
+    if (formStart > 0) {
+      candidates.add(trimmed.slice(0, formStart).trim());
+    }
+    if (trimmed.startsWith("メガ")) {
+      candidates.add(trimmed.slice("メガ".length).trim());
+    }
+    if (trimmed.startsWith("ゲンシ")) {
+      candidates.add(trimmed.slice("ゲンシ".length).trim());
+    }
+
+    for (const candidate of Array.from(candidates)) {
+      const normalized = candidate.replace(/[XYＸＹ]$/, "").trim();
+      if (normalized) candidates.add(normalized);
+    }
+
+    return Array.from(candidates).filter(Boolean);
+  }
+
+  function resolveDisplayDexId(pokemon) {
+    const rawId = Number(pokemon?.id);
+    if (!Number.isFinite(rawId)) return null;
+    if (rawId <= 9999) return rawId;
+
+    const nameCandidates = collectBaseNameCandidates(pokemon?.name);
+    let bestRegularId = null;
+    let bestAnyId = null;
+
+    for (const baseName of nameCandidates) {
+      for (const candidate of pokemonList) {
+        const candidateName = typeof candidate?.name === "string" ? candidate.name : "";
+        if (!candidateName) continue;
+        if (candidateName !== baseName && !candidateName.startsWith(`${baseName}（`)) continue;
+
+        const candidateId = Number(candidate.id);
+        if (!Number.isFinite(candidateId)) continue;
+        if (bestAnyId === null || candidateId < bestAnyId) {
+          bestAnyId = candidateId;
+        }
+        if (candidateId <= 9999 && (bestRegularId === null || candidateId < bestRegularId)) {
+          bestRegularId = candidateId;
+        }
+      }
+    }
+
+    return bestRegularId ?? bestAnyId ?? rawId;
+  }
+
   function readLastId() {
     try {
       const raw = sessionStorage.getItem(LAST_ID_KEY);
@@ -101,6 +154,10 @@ if (!cardRoot) {
     const totalStats = calcTotalStats(pokemon);
     const generation = pokemon.generation || pokemon.debutGen || "—";
     const debutTitle = pokemon.debutTitle ? pokemon.debutTitle : "";
+    const displayDexId = resolveDisplayDexId(pokemon);
+    const displayDexText = Number.isFinite(displayDexId)
+      ? String(displayDexId).padStart(4, "0")
+      : "----";
     const modeSelectionUrl = `game.html?mode=randomStart&startPokemonId=${encodeURIComponent(String(pokemon.id))}`;
     const detailUrl = toPokemonPagePath(pokemon.id);
     const profileRows = [
@@ -125,7 +182,7 @@ if (!cardRoot) {
           />
         </div>
         <div class="random-card__meta">
-          <p class="random-card__number">No.${String(pokemon.id).padStart(4, "0")}</p>
+          <p class="random-card__number">No.${displayDexText}</p>
           <h3 class="random-card__name">${pokemon.name}</h3>
 
           <h4 class="random-card__section-title">種族値</h4>

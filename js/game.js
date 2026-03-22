@@ -107,7 +107,7 @@ let correctlyAnsweredPokemon = [];
 const hintRevealedKeys = new Set();
 
 export function initGame(options = {}) {
-  const { initialScreen = 'mode-selection-screen' } = options;
+  const { initialScreen = 'game-container' } = options;
   switchScreen(initialScreen);
   setGameTitle('');
   setGameStatus('');
@@ -224,11 +224,16 @@ function resetGame() {
   const playAgainBtn = document.getElementById('post-game-play-again');
   if (playAgainBtn) playAgainBtn.classList.remove('hidden');
   const backToMenuBtn = document.getElementById('post-game-back-to-menu');
-  if (backToMenuBtn) backToMenuBtn.textContent = 'モード選択へ';
+  if (backToMenuBtn) backToMenuBtn.textContent = 'ホームへ戻る';
   
   setGameStatus('');
   hideHintButton();
   setHintButtonEnabled(false);
+}
+
+function navigateToHome() {
+  if (typeof window === 'undefined') return;
+  window.location.replace('index.html');
 }
 
 function isCorrectAnswer(guessed, correct) {
@@ -355,8 +360,8 @@ async function handleBackToMenu() {
     if (!ok) return;
   }
   resetGame();
-  switchScreen('mode-selection-screen');
   versusHistoryGuard = false;
+  navigateToHome();
 }
 
 function startVersus() {
@@ -442,5 +447,5 @@ window.addEventListener('popstate', async () => {
   }
   versusHistoryGuard = false;
   resetGame();
-  switchScreen('mode-selection-screen');
+  navigateToHome();
 });

@@ -41,7 +41,6 @@ const BASE_SECTIONS = [
     { id: "za", label: "ZA", titles: ["ZA"] },
   ] },
   { heading: "外伝作品", options: [
-    { id: "go", label: "ポケモンGO", titles: ["ポケモンGO"] },
     { id: "home", label: "ポケモンHOME", titles: ["ポケモンHOME"] },
   ] },
 ];

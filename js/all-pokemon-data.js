@@ -29229,7 +29229,7 @@ export const allPokemonData = {
     "genderRate": -1,
     "formsSwitchable": false,
     "debutGen": 9,
-    "debutTitle": "ポケモンGO"
+    "debutTitle": "SV"
   },
   "サーフゴー": {
     "id": 1000,
@@ -34019,7 +34019,7 @@ export const allPokemonData = {
   "ケンタロス（パルデアのすがた単）": {
     "id": 10250,
     "name": "ケンタロス（パルデアのすがた単）",
-    "generation": 1,
+    "generation": 9,
     "type1": "かくとう",
     "type2": "なし",
     "height": 1.4,
@@ -34042,13 +34042,13 @@ export const allPokemonData = {
     "eggGroup2": "なし",
     "genderRate": 0,
     "formsSwitchable": false,
-    "debutGen": 1,
+    "debutGen": 9,
     "debutTitle": "SV"
   },
   "ケンタロス（パルデアのすがた炎）": {
     "id": 10251,
     "name": "ケンタロス（パルデアのすがた炎）",
-    "generation": 1,
+    "generation": 9,
     "type1": "かくとう",
     "type2": "ほのお",
     "height": 1.4,
@@ -34071,13 +34071,13 @@ export const allPokemonData = {
     "eggGroup2": "なし",
     "genderRate": 0,
     "formsSwitchable": false,
-    "debutGen": 1,
+    "debutGen": 9,
     "debutTitle": "SV"
   },
   "ケンタロス（パルデアのすがた水）": {
     "id": 10252,
     "name": "ケンタロス（パルデアのすがた水）",
-    "generation": 1,
+    "generation": 9,
     "type1": "かくとう",
     "type2": "みず",
     "height": 1.4,
@@ -34100,7 +34100,7 @@ export const allPokemonData = {
     "eggGroup2": "なし",
     "genderRate": 0,
     "formsSwitchable": false,
-    "debutGen": 1,
+    "debutGen": 9,
     "debutTitle": "SV"
   },
   "デオキシス（アタックフォルム）": {

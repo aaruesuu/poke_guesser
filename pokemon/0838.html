@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>トロッゴン | Poke Guesser</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="icon"
+      href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+    />
+  </head>
+  <body>
+    <header id="app-header">
+      <a class="logo" href="../index.html">Poke <span class="logo-accent">Guesser</span></a>
+      <button id="hamburger-menu" aria-label="メニューを開く" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="nav-menu">
+        <div class="header-buttons">
+          <a class="header-button" href="../index.html">HOME</a>
+          <a class="header-button" href="../game.html">PLAY</a>
+          <a class="header-button" href="../settings.html">SETTINGS</a>
+          <a class="header-button" href="../about.html">ABOUT</a>
+          <a class="header-button" href="../updates.html">UPDATES</a>
+          <a class="header-button" href="../faq.html">FAQ</a>
+          <a class="header-button" href="../glossary.html">用語</a>
+          <a class="header-button" href="../privacy.html">Privacy</a>
+          <a class="header-button" href="../terms.html">Terms</a>
+          <a class="header-button" href="../contact.html">Contact</a>
+          <a class="header-button" href="../credits.html">Credits</a>
+          <a class="header-button" href="../profile.html">運営者情報</a>
+        </div>
+      </nav>
+    </header>
+
+    <div id="theme-container" class="page-shell">
+      <main id="main-content">
+        <div class="page-container">
+          <header class="page-hero">
+            <h1>トロッゴン</h1>
+            <p>ポケモン個別ページ（No.0838）</p>
+          </header>
+
+          <section class="page-card pokemon-search-section" aria-label="ポケモン詳細検索">
+            <form id="pokemon-search-form" class="pokemon-search-form" autocomplete="off">
+              <label class="pokemon-search-label" for="guess-input">ポケモン詳細を検索</label>
+              <div id="game-controls" class="pokemon-search-controls">
+                <div id="input-area">
+                  <input
+                    id="guess-input"
+                    type="text"
+                    autocomplete="off"
+                    placeholder="ポケモン名で検索"
+                  />
+                  <button id="search-button" class="guess-button" type="submit">検索</button>
+                </div>
+                <div id="suggestions-box" class="hidden"></div>
+              </div>
+              <!-- 検索失敗時のみメッセージ表示 -->
+              <p id="pokemon-search-feedback" class="pokemon-search-feedback" aria-live="polite"></p>
+            </form>
+          </section>
+
+          <section class="page-card pokemon-detail-hero">
+            <div class="pokemon-detail-sprite-wrap">
+              <img class="pokemon-detail-sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/838.png" alt="トロッゴン" />
+            </div>
+            <div class="pokemon-detail-headline">
+              <p class="pokemon-detail-no">図鑑No: 0838</p>
+              <h2 class="pokemon-detail-name">トロッゴン</h2>
+              <p class="pokemon-detail-types">タイプ: いわ / ほのお</p>
+            </div>
+          </section>
+
+          <section class="page-card page-content">
+            <h2>基本情報</h2>
+            <table class="pokemon-info-table">
+              <tbody>
+                <tr><th>図鑑No / ID</th><td>0838</td></tr>
+                <tr><th>タイプ</th><td>いわ / ほのお</td></tr>
+                <tr><th>分類</th><td>せきたんポケモン</td></tr>
+                <tr><th>世代</th><td>8</td></tr>
+                <tr><th>初登場作品</th><td>剣盾</td></tr>
+                <tr><th>高さ</th><td>1.1m</td></tr>
+                <tr><th>重さ</th><td>78kg</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="page-card page-content">
+            <h2>図鑑説明</h2>
+            <p class="dex-flavor-text">たいないで せきたんを つくりだす。 むかしの ガラルでは おとした せきたんを せいかつに りようした。</p>
+            <p class="dex-flavor-meta">出典バージョン: sword</p>
+          </section>
+
+          <section class="page-card page-content">
+            <h2>種族値</h2>
+            <table class="pokemon-stat-table">
+              <tbody>
+                <tr><th>HP</th><td>80</td></tr>
+                <tr><th>こうげき</th><td>60</td></tr>
+                <tr><th>ぼうぎょ</th><td>90</td></tr>
+                <tr><th>とくこう</th><td>60</td></tr>
+                <tr><th>とくぼう</th><td>70</td></tr>
+                <tr><th>すばやさ</th><td>50</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><th>合計種族値</th><td>410</td></tr>
+              </tfoot>
+            </table>
+          </section>
+
+          <section class="page-card page-content">
+            <h2>代表技</h2>
+            <table class="pokemon-move-table">
+              <thead>
+                <tr>
+                  <th>技名</th>
+                  <th>タイプ</th>
+                  <th>分類</th>
+                  <th>威力</th>
+                  <th>習得Lv</th>
+                </tr>
+              </thead>
+              <tbody>
+<tr>
+                <td>もえつきる</td>
+                <td>ほのお</td>
+                <td>特殊</td>
+                <td>130</td>
+                <td>55</td>
+              </tr>
+<tr>
+                <td>ロックカット</td>
+                <td>いわ</td>
+                <td>変化</td>
+                <td>—</td>
+                <td>15</td>
+              </tr>
+<tr>
+                <td>ストーンエッジ</td>
+                <td>いわ</td>
+                <td>物理</td>
+                <td>100</td>
+                <td>55</td>
+              </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <nav class="page-card pokemon-detail-neighbors" aria-label="前後のポケモン">
+            <a class="pokemon-detail-neighbor is-prev" href="0837.html"><span class="pokemon-detail-neighbor-arrow">←</span><span class="pokemon-detail-neighbor-name">タンドン</span><img class="pokemon-detail-neighbor-icon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/837.png" alt="タンドン" loading="lazy" decoding="async" /></a>
+            <a class="pokemon-detail-neighbor pokemon-detail-neighbor-home" href="../index.html">HOMEへ</a>
+            <a class="pokemon-detail-neighbor is-next" href="0839.html"><img class="pokemon-detail-neighbor-icon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/839.png" alt="セキタンザン" loading="lazy" decoding="async" /><span class="pokemon-detail-neighbor-name">セキタンザン</span><span class="pokemon-detail-neighbor-arrow">→</span></a>
+          </nav>
+
+          <footer id="site-footer">
+            <div class="footer-links">
+              <a class="footer-link" href="../privacy.html">Privacy</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="../terms.html">Terms</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="../contact.html">Contact</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="../credits.html">Credits</a>
+              <span class="footer-sep">｜</span>
+              <a class="footer-link" href="../faq.html">FAQ</a>
+            </div>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <div class="footer-copy">© 2026 Poke Guesser</div>
+
+    <script src="../js/site-nav.js" defer></script>
+    <script type="module" src="../js/all-pokemon-data.js"></script>
+    <script type="module" src="../js/pokemon-search.js"></script>
+  </body>
+</html>

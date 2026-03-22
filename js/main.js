@@ -11,11 +11,6 @@ function getModeFromQuery() {
   return null;
 }
 
-function isPlayEntryPage() {
-  const pathname = (window.location.pathname || "").toLowerCase();
-  return pathname.endsWith("/play.html") || pathname.endsWith("play.html");
-}
-
 function startMode(mode) {
   if (!mode) return;
 
@@ -37,10 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initDOM(Handlers);
 
   if (!mode) {
-    if (isPlayEntryPage()) {
-      initGame({ initialScreen: "mode-selection-screen" });
-      return;
-    }
     window.location.replace("index.html");
     return;
   }

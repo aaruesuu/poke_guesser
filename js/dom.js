@@ -21,22 +21,15 @@ import {
 
 const allPokemonNames = Object.keys(allPokemonData);
 
-const modeSelectionScreen = document.getElementById('mode-selection-screen');
 const gameContainer = document.getElementById('game-container');
 const settingsScreen = document.getElementById('settings-screen');
-
-const randomStartModeButton = document.getElementById('random-start-mode-button');
-const statsModeButton = document.getElementById('base-stats-mode-button');
-const versusModeButton = document.getElementById('versus-mode-button');
 
 const guessButton = document.getElementById('guess-button');
 const headerLogo = document.getElementById('logo-home');
 const homeButton = document.getElementById('home-button');
 const hintButton = document.getElementById('hint-button');
 
-const howToPlayButtonHome = document.getElementById('how-to-play-button-home');
 const settingsButton = document.getElementById('settings-button');
-const settingsButtonHome = document.getElementById('settings-button-home');
 const howToHomeToggle = document.getElementById('how-to-home-toggle');
 const howtoSection = document.getElementById("how-to-home-section");
 
@@ -73,7 +66,7 @@ const settingsSelectAllButton = document.getElementById('settings-select-all');
 const settingsClearAllButton = document.getElementById('settings-clear-all');
 
 let resultAccordionSeq = 0;
-let lastNonSettingsScreen = modeSelectionScreen?.id || 'mode-selection-screen';
+let lastNonSettingsScreen = gameContainer?.id || 'game-container';
 
 function setAccordionExpanded(btn, expanded) {
   if (!btn) return;
@@ -98,11 +91,8 @@ function toggleAccordion(btn) {
 }
 
 export function initDOM(handlers) {
-  const { onStartRandom, onStartStats, onGuess, onRandomStart, onPlayAgain, onBackToMenu, onHint } = handlers;
+  const { onGuess, onRandomStart, onPlayAgain, onBackToMenu, onHint } = handlers;
 
-  if (randomStartModeButton) randomStartModeButton.addEventListener('click', onStartRandom);
-  if (statsModeButton) statsModeButton.addEventListener('click', onStartStats);
-  if (versusModeButton && handlers.onStartVersus) versusModeButton.addEventListener('click', handlers.onStartVersus);
   if (randomStartButton) randomStartButton.addEventListener('click', onRandomStart);
   if (guessButton) guessButton.addEventListener('click', onGuess);
   if (headerLogo) headerLogo.addEventListener('click', onBackToMenu);
@@ -123,9 +113,7 @@ export function initDOM(handlers) {
     }
   });
 
-  if (howToPlayButtonHome) howToPlayButtonHome.addEventListener('click', openHowToPlayModal);
   if (settingsButton) settingsButton.addEventListener('click', openSettingsScreen);
-  if (settingsButtonHome) settingsButtonHome.addEventListener('click', openSettingsScreen);
 
   if (howToHomeToggle && howtoSection) {
     const isCollapsed = localStorage.getItem(HOW_TO_COLLAPSE_KEY) === '1';
@@ -189,7 +177,6 @@ export function initDOM(handlers) {
 
 export function switchScreen(targetScreen) {
   const screens = [
-    modeSelectionScreen,
     gameContainer,
     settingsScreen,
   ].filter(Boolean);
@@ -498,7 +485,7 @@ export function showResultModal(pokemon, verdict, gameMode, guessesLeft, usedHin
     }
   }
   if (backToMenuBtn) {
-    backToMenuBtn.textContent = gameMode === 'versus' ? 'ホームへ戻る' : 'モード選択へ';
+    backToMenuBtn.textContent = 'ホームへ戻る';
   }
   const hintSection = resultModal.querySelector('#result-modal-hints');
   const hintListEl = hintSection?.querySelector('.result-hints-list');
@@ -614,7 +601,7 @@ function openSettingsScreen() {
 }
 
 function closeSettingsScreen() {
-  switchScreen(lastNonSettingsScreen || 'mode-selection-screen');
+  switchScreen(lastNonSettingsScreen || 'game-container');
 }
 
 function renderDebutFilterOptions() {
@@ -708,137 +695,6 @@ export function openModal(title, content, options = {}) {
 
 export function closeModal() {
   if (modalOverlay) modalOverlay.classList.add('hidden');
-}
-
-function openHowToPlayModal() {
-  const howToContent = `
-  <div class="accordion" role="region" aria-label="遊び方の詳細">
-    <section class="accordion-item">
-      <h4 class="accordion-header">
-      <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-panel-pokemon" id="acc-btn-pokemon">
-      ノーマルモードとは
-      <span class="accordion-icon" aria-hidden="true"></span>
-        </button>
-      </h4>
-      <div id="acc-panel-pokemon" class="accordion-panel" role="region" aria-labelledby="acc-btn-pokemon" hidden>
-        <div class="accordion-panel-inner">
-        <p>ノーマルモード（Poke Guesserの基本モード）です。ゲーム開始時に<strong>ランダムな1匹</strong>の情報が最初のヒントとして表示されます。<br>1プレイで最大10回の回答が可能で、比較項目は以下になります。</p>
-          <ul class="bullets">
-            <li>初登場作品（世代）</li>
-            <li>合計種族値</li>
-            <li>タイプ</li>
-            <li>特性</li>
-            <li>高さ</li>
-            <li>重さ</li>
-            <li>性別比</li>
-            <li>進化数</li>
-            <li>タマゴグループ</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="accordion-item">
-      <h4 class="accordion-header">
-        <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-panel-stats" id="acc-btn-stats">
-        種族値モードとは
-          <span class="accordion-icon" aria-hidden="true"></span>
-        </button>
-      </h4>
-      <div id="acc-panel-stats" class="accordion-panel" role="region" aria-labelledby="acc-btn-stats" hidden>
-        <div class="accordion-panel-inner">
-        <p>ポケモンの<strong>6つの種族値</strong>を手がかりに正解を推測するモードです。<br>最初のヒントはランダムスタートボタンで表示され、回答ごとに各種族値が一致しているかどうかが表示されます。<br>比較項目は以下になります。</p>
-          回答ごとに各種族値が一致しているかどうかが表示されます。<br>比較項目は以下になります。</p>
-          <ul class="bullets">
-            <li>hp</li>
-            <li>こうげき</li>
-            <li>ぼうぎょ</li>
-            <li>とくこう</li>
-            <li>とくぼう</li>
-            <li>すばやさ</li>
-          </ul>
-          <p class="note">※最大回答数は10回です</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="accordion-item">
-      <h4 class="accordion-header">
-      <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-panel-battle" id="acc-btn-battle">
-      対戦モードとは
-          <span class="accordion-icon" aria-hidden="true"></span>
-        </button>
-      </h4>
-      <div id="acc-panel-battle" class="accordion-panel" role="region" aria-labelledby="acc-btn-battle" hidden>
-        <div class="accordion-panel-inner">
-        <p>オンラインで1対1の推測バトルを行うモードです。先行後攻決定後、自動でランダムなポケモンが1匹表示され、そこから交互に回答していきます。</p>
-        </div>
-      </div>
-    </section>
-
-
-        <section class="accordion-item">
-      <h4 class="accordion-header">
-        <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-panel-titles" id="acc-btn-titles">
-          対象作品（初出作品）
-          <span class="accordion-icon" aria-hidden="true"></span>
-        </button>
-      </h4>
-      <div id="acc-panel-titles" class="accordion-panel" role="region" aria-labelledby="acc-btn-titles" hidden>
-        <div class="accordion-panel-inner">
-          <ul class="bullets">
-            <li><strong>第一世代</strong><br>
-              ポケットモンスター 赤／緑／青／ピカチュウ
-            </li>
-            <li><strong>第二世代</strong><br>
-              ポケットモンスター 金／銀／クリスタル
-            </li>
-            <li><strong>第三世代</strong><br>
-              ポケットモンスター ルビー／サファイア／<br>
-              ファイアレッド／リーフグリーン／エメラルド
-            </li>
-            <li><strong>第四世代</strong><br>
-              ポケットモンスター ダイヤモンド／パール／プラチナ／<br>
-              ハートゴールド／ソウルシルバー
-            </li>
-            <li><strong>第五世代</strong><br>
-              ポケットモンスター ブラック／ホワイト／<br>
-              ブラック2／ホワイト2
-            </li>
-            <li><strong>第六世代</strong><br>
-              ポケットモンスター X／Y／<br>
-              オメガルビー／アルファサファイア
-            </li>
-            <li><strong>第七世代</strong><br>
-              ポケットモンスター サン／ムーン／<br>
-              ウルトラサン／ウルトラムーン
-            </li>
-            <li><strong>第八世代</strong><br>
-              ポケットモンスター ソード／シールド／<br>
-              ブリリアントダイヤモンド／シャイニングパール／<br>
-              レッツゴー ピカチュウ・イーブイ／LEGENDS アルセウス
-            </li>
-            <li><strong>第九世代</strong><br>
-              ポケットモンスター スカーレット／バイオレット
-            </li>
-            <li><strong>外伝作品</strong><br>
-              ポケモンGO／ポケモンHOME
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </div>
-  
-`;
-
-openModal('モード説明', howToContent);
-
-  const accRoot =
-    document.querySelector('#modal .modal-body .accordion') ||
-    document.querySelector('#modal .accordion') ||
-    document.querySelector('.accordion');
-  setupAccordion(accRoot);
 }
 
 function setupAccordion(root) {
